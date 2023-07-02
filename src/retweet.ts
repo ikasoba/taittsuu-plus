@@ -5,6 +5,10 @@ import { textLimit } from "./util.js";
 export const installReTweetButton = () => {
   onAddPost((postElem, post) => {
     const retweetButton = postElem.find("button.post-rt-button");
+
+    // リツート機能が実装されたら上書きしない
+    if (!retweetButton.attr("onclick")?.search("誠意開発中です")) return;
+
     retweetButton.attr("onclick", null);
 
     retweetButton.on("click", (event) => {
