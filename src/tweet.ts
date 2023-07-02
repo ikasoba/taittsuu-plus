@@ -1,3 +1,5 @@
+import { ImageComponent } from "./ImageComponent.js";
+import { TweetComponent } from "./TweetComponent.js";
 import { onAddPost } from "./taittsuu.js";
 
 export const showTweetDialog = (content?: string) => {
@@ -93,17 +95,14 @@ export const createURL = (
     const url = new URL(urlText);
 
     if (url.pathname.match(/\.(?:a?png|jpe?g|webp|gif|bmp)/)) {
-      const id = url.pathname.slice(3);
-      const img = document.createElement("img");
-
-      img.src = urlText;
-      img.style.width = "100%";
-      img.style.height = "100%";
-      img.style.aspectRatio = "16 / 9";
-      img.style.objectFit = "contain";
-      img.style.background = "#444";
-
-      attachments.value.push(img);
+      attachments.value.push(ImageComponent(urlText));
+    } else if (url.hostname == "taittsuu.com") {
+      const tweet = url.pathname.match(
+        /^\/users\/[a-zA-Z_0-9]+\/status\/([0-9]+)/
+      );
+      if (tweet) {
+        attachments.value.push(TweetComponent(tweet[1]));
+      }
     }
   } catch (_) {}
 
