@@ -7,7 +7,7 @@ export const installReTweetButton = () => {
     const retweetButton = postElem.find("button.post-rt-button");
 
     // リツート機能が実装されたら上書きしない
-    if (!retweetButton.attr("onclick")?.search("誠意開発中です")) return;
+    if (!retweetButton.attr("onclick")?.match("誠意開発中です")) return;
 
     retweetButton.attr("onclick", null);
 

@@ -7,7 +7,7 @@ export const installLikeButton = () => {
     const likeButton = postElem.find("button.post-like-button");
 
     // いいね機能が追加されてるなら上書きしない
-    if (!likeButton.attr("onclick")?.search("誠意開発中です")) return;
+    if (!likeButton.attr("onclick")?.match("誠意開発中です")) return;
 
     likeButton.attr("onclick", null);
 
