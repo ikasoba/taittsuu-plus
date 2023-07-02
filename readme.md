@@ -33,9 +33,9 @@
 
 # インストール・アップデート方法
 
-- まず、tampermonkey をブラウザにインストールします。
+- まず、[tampermonkey](https://www.tampermonkey.net/) 拡張機能をブラウザにインストールします。
 
-- 次に tampermonkey のダッシュボードを開きます。
+- 次に拡張機能アイコンから tampermonkey のダッシュボードを開きます。
   ![](./doc/tampermonkey-open-dashboard.png)
 
 - 次にユーティリティタブを開きます。
