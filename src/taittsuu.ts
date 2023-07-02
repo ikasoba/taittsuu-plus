@@ -1,3 +1,4 @@
+import { User } from "./User.js";
 import { Tweet } from "./tweet.js";
 
 export type AddPostHandler = (
@@ -16,25 +17,68 @@ export const removeAddPostHandler = (fn: AddPostHandler) => {
   onAddPostHandler.delete(fn);
 };
 
+export type AddUserHandler = (
+  postElem: JQuery<HTMLElement>,
+  post: User,
+  postsElem: JQuery<HTMLElement>
+) => void;
+
+const onAddUserHandler: Set<AddPostHandler> = new Set();
+
+export const AddUser = (fn: AddPostHandler) => {
+  onAddPostHandler.add(fn);
+};
+
+export const removeAddUserHandler = (fn: AddPostHandler) => {
+  onAddPostHandler.delete(fn);
+};
+
+const addPost = Taittsuu.Post.addPost;
 Taittsuu.Post.addPost = function (postsElem, post) {
-  const postElem = $("#postBaseElemWrap").children("div:first").clone();
-  postElem.find(".post-user-name-value")[0].innerText = post.user_name;
-  if (!post.is_verified) {
-    postElem.find(".post-user-badge")[0].style.display = "none";
-  }
-  postElem.find(".post-user-tid")[0].innerText = "@" + post.user_screenname;
-  postElem.find(".post-content")[0].innerText = post.content;
-  let createdAt = new Date(post.created_at);
-  postElem.find(".post-time")[0].innerText = createdAt.toLocaleString();
+  let postElem: JQuery<HTMLElement>;
 
-  (postElem.find(".post-link-user")[0] as HTMLAnchorElement).href =
-    "/users/" + post.user_screenname;
-  (postElem.find(".post-link-post")[0] as HTMLAnchorElement).href =
-    "/users/" + post.user_screenname + "/status/" + post.id;
+  const postsElemProxy = new Proxy(postsElem, {
+    get(_, key, __) {
+      if (key == "append") {
+        return (...a: any[]) => {
+          postElem = a[0];
 
-  for (const fn of onAddPostHandler) {
-    fn(postElem, post, postsElem);
-  }
+          for (const fn of onAddPostHandler) {
+            fn(postElem, post, postsElem);
+          }
 
-  postsElem.append(postElem);
+          postsElem.append(...a);
+        };
+      } else {
+        return postsElem[key as any];
+      }
+    },
+  });
+
+  addPost(postsElemProxy, post);
+};
+
+const addUser = Taittsuu.User.addUser;
+Taittsuu.User.addUser = function (postsElem, post) {
+  let postElem: JQuery<HTMLElement>;
+
+  const postsElemProxy = new Proxy(postsElem, {
+    get(_, key, __) {
+      if (key == "append") {
+        return (...a: any[]) => {
+          postElem = a[0];
+
+          for (const fn of onAddPostHandler) {
+            fn(postElem, post, postsElem);
+          }
+
+          postsElem.append(...a);
+        };
+      } else {
+        return postsElem[key as any];
+      }
+    },
+  });
+
+  addUser(postsElemProxy, post);
 };
