@@ -17,7 +17,7 @@ export const showRetweetDialog = (tweet: Tweet) => {
   console.log(textLimit(tweet.content, 50), tweet);
   showTweetDialog(
     `https://taittsuu.com/users/${tweet.user_screenname}/status/${tweet.id}\n` +
-      `🔁 ${tweet.user_name} ${tweet.user_screenname}・${new Date(
+      `🔁 ${tweet.user_name} @${tweet.user_screenname}・${new Date(
         tweet.created_at
       ).toLocaleString()}\n` +
       textLimit(tweet.content, 50)

@@ -122,6 +122,76 @@ export const createURL = (
   return true;
 };
 
+export const createBold = (
+  node: Node,
+  current: { value: Node },
+  i: { value: number },
+  content: HTMLElement,
+  attachments: { value: HTMLElement[] }
+): boolean => {
+  if (!(current.value instanceof Text)) {
+    return false;
+  }
+
+  const m = current.value.textContent?.match(/\*\*?(\\*|[^*])*\*?\*/d);
+  if (!m) {
+    return false;
+  }
+
+  const offset = m?.indices?.[0][0]!;
+  const length = m?.indices?.[0][1]! - offset;
+
+  console.log(m, current.value);
+
+  const textNode = current.value.splitText(offset);
+  current.value = textNode.splitText(length);
+
+  const bold = document.createElement("span");
+  bold.style.fontWeight = "bold";
+  bold.innerText = textNode.textContent!;
+
+  content.replaceChild(bold, textNode);
+
+  i.value += 1;
+
+  return true;
+};
+
+export const createItalic = (
+  node: Node,
+  current: { value: Node },
+  i: { value: number },
+  content: HTMLElement,
+  attachments: { value: HTMLElement[] }
+): boolean => {
+  if (!(current.value instanceof Text)) {
+    return false;
+  }
+
+  const m = current.value.textContent?.match(/__?(\\_|[^_])*_?_/d);
+  if (!m) {
+    return false;
+  }
+
+  const offset = m?.indices?.[0][0]!;
+  const length = m?.indices?.[0][1]! - offset;
+
+  console.log(m, current.value);
+
+  const textNode = current.value.splitText(offset);
+  current.value = textNode.splitText(length);
+
+  const bold = document.createElement("span");
+  bold.style.fontStyle = "italic";
+  bold.innerText = textNode.textContent!;
+
+  content.replaceChild(bold, textNode);
+
+  i.value += 1;
+
+  return true;
+};
+
 export const choice =
   (transformers: Transformer[]): Transformer =>
   (
@@ -161,13 +231,12 @@ export const installTweetContentPlus = () => {
         const currentRef = { value: current };
         const indexRef = { value: i };
 
-        const isTransformed = choice([createMention, createURL])(
-          node,
-          currentRef,
-          indexRef,
-          content,
-          attachments
-        );
+        const isTransformed = choice([
+          createMention,
+          createURL,
+          createBold,
+          createItalic,
+        ])(node, currentRef, indexRef, content, attachments);
         if (!isTransformed) break;
 
         current = currentRef.value;
