@@ -51,6 +51,27 @@
 
   https://ikasoba.github.io/taittsuu-plus/index.js
 
-- 画面が変わるので、インストールボタンをもう一度押せば完了です！
+# インストール・アップデート方法 (スマホ)
 
-  ![Alt text](./doc/tampermonkey-install-userscript.png)
+- まず、 [Stay](https://apps.apple.com/jp/app/stay-safari-companion/id1591620171) というアプリを入れます。
+
+- `Enable Stay Safari Extension.`から、指示に従って拡張機能を有効にします。
+  - `Tap Here Open Safari` Safari を開きます。
+  - `ぁぁ`ボタンから`拡張機能を管理` -> `Stay`を有効化
+
+- `Stay`アプリに戻り、`I am all experienced user, skip for now.`を押す。
+- 警告は`OK`ボタンを押して無視
+
+- 以下のURLを開く
+
+  https://ikasoba.github.io/taittsuu-plus/index.js
+
+- `Tap to install`というボタンがあるので押す
+
+- `Stayで開きますか？`と聞かれるので`開く`と答える
+
+- 右上の`作成ボタン`を押す
+
+- `installed`とでるので閉じる
+
+- これで完了！
