@@ -1,5 +1,7 @@
 # タイッツー Plus
 
+作者: [いかそば](https://taittsuu.com/users/ikasoba000)
+
 タイッツー Plus は tampermonkey で動くユーザースクリプトです。
 もしかしたら greasemonkey でも動くかもしれないです。
 
