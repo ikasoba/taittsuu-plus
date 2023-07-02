@@ -1,4 +1,9 @@
 import { context } from "esbuild";
+import fs from "node:fs/promises";
+
+const packageJson: { version: number } = JSON.parse(
+  await fs.readFile("./package.json", "utf8")
+);
 
 export default await context({
   entryPoints: ["src/index.ts"],
@@ -9,7 +14,7 @@ export default await context({
       "// ==UserScript==\n" +
       "// @name         Taittsuu-Plus\n" +
       "// @namespace    http://tampermonkey.net/\n" +
-      "// @version      0.7\n" +
+      `// @version      ${packageJson.version}\n` +
       "// @description  タイッツーに機能を追加します\n" +
       "// @author       github.com/ikasoba\n" +
       "// @match        https://taittsuu.com/*\n" +

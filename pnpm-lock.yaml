@@ -8,6 +8,9 @@ devDependencies:
   '@types/jquery':
     specifier: ^3.5.16
     version: 3.5.16
+  '@types/node':
+    specifier: ^20.3.3
+    version: 20.3.3
   '@types/tampermonkey':
     specifier: ^4.0.10
     version: 4.0.10
