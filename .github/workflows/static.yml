@@ -29,9 +29,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
       - name: Setup Pages
         uses: actions/configure-pages@v3
 
@@ -47,8 +44,25 @@ jobs:
           version: 7
           run_install: false
 
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: restore node_modules
+        id: restore-node-modules
+        uses: actions/cache/restore@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-modules
+
       - name: install dependencies
         run: pnpm i --no-frozen-lockfile
+
+      - name: save node_modules
+        id: save-node-modules
+        uses: actions/cache/save@v3
+        with:
+          path: node_modules
+          key: ${{ steps.restore-node-modules.outputs.cache-primary-key }}
 
       - name: build
         run: pnpm build
