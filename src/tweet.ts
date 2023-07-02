@@ -193,7 +193,7 @@ export const installTweetContentPlus = () => {
     const content = postElem.find(".post-content")[0];
     const contentWrap = content.parentElement!;
     const attachments = { value: [] };
-    for (let i = 0; i < content.childNodes.length; i++) {
+    for (let i = 0; i < content.childNodes.length; ) {
       const node = content.childNodes[i];
 
       let current: Node = node;
