@@ -18,4 +18,6 @@ export default await context({
       "// ==/UserScript==\n",
   },
   format: "iife",
+  minify: true,
+  sourcemap: "linked",
 });
