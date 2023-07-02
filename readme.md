@@ -68,6 +68,8 @@
 
   https://ikasoba.github.io/taittsuu-plus/index.js
 
+  ![image](https://github.com/ikasoba/taittsuu-plus/assets/57828948/1feb2cfa-be3d-445c-97c4-ef539fa36c93)
+
 - `Tap to install`というボタンがあるので押す
 
 - `Stayで開きますか？`と聞かれるので`開く`と答える
