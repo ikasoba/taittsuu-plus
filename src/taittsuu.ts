@@ -17,22 +17,6 @@ export const removeAddPostHandler = (fn: AddPostHandler) => {
   onAddPostHandler.delete(fn);
 };
 
-export type AddUserHandler = (
-  postElem: JQuery<HTMLElement>,
-  post: User,
-  postsElem: JQuery<HTMLElement>
-) => void;
-
-const onAddUserHandler: Set<AddPostHandler> = new Set();
-
-export const AddUser = (fn: AddPostHandler) => {
-  onAddPostHandler.add(fn);
-};
-
-export const removeAddUserHandler = (fn: AddPostHandler) => {
-  onAddPostHandler.delete(fn);
-};
-
 const addPost = Taittsuu.Post.addPost;
 Taittsuu.Post.addPost = function (postsElem, post) {
   let postElem: JQuery<HTMLElement>;
@@ -58,6 +42,22 @@ Taittsuu.Post.addPost = function (postsElem, post) {
   addPost(postsElemProxy, post);
 };
 
+export type AddUserHandler = (
+  postElem: JQuery<HTMLElement>,
+  post: User,
+  postsElem: JQuery<HTMLElement>
+) => void;
+
+const onAddUserHandler: Set<AddUserHandler> = new Set();
+
+export const onAddUser = (fn: AddUserHandler) => {
+  onAddUserHandler.add(fn);
+};
+
+export const removeAddUserHandler = (fn: AddUserHandler) => {
+  onAddUserHandler.delete(fn);
+};
+
 const addUser = Taittsuu.User.addUser;
 Taittsuu.User.addUser = function (postsElem, post) {
   let postElem: JQuery<HTMLElement>;
@@ -68,7 +68,7 @@ Taittsuu.User.addUser = function (postsElem, post) {
         return (...a: any[]) => {
           postElem = a[0];
 
-          for (const fn of onAddPostHandler) {
+          for (const fn of onAddUserHandler) {
             fn(postElem, post, postsElem);
           }
 

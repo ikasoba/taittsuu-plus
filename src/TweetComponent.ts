@@ -1,7 +1,7 @@
 import { post } from "jquery";
 import { TaittsuClient } from "./TaittsuClient.js";
 
-export function TweetComponent(id: string) {
+export function TweetComponent(userId: string, id: string) {
   const postElem = $("#postBaseElemWrap").children("div:first").clone();
   postElem.find(".post-user-name-value")[0].innerText = "loading...";
   postElem.find(".post-user-badge")[0].style.display = "none";
@@ -32,10 +32,12 @@ export function TweetComponent(id: string) {
     let createdAt = new Date(post.created_at);
     postElem.find(".post-time")[0].innerText = createdAt.toLocaleString();
 
-    (postElem.find(".post-link-user")[0] as HTMLAnchorElement).href =
-      "/users/" + post.user_screenname;
-    (postElem.find(".post-link-post")[0] as HTMLAnchorElement).href =
-      "/users/" + post.user_screenname + "/status/" + post.id;
+    postElem
+      .find(".post-link-user")
+      .attr("href", "/users/" + post.user_screenname);
+    postElem
+      .find(".post-link-post")
+      .attr("href", "/users/" + post.user_screenname + "/status/" + post.id);
   });
 
   return wrapper[0];

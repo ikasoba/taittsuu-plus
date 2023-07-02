@@ -90,7 +90,7 @@ export const createAttachment = (
         /^\/users\/[a-zA-Z_0-9]+\/status\/([0-9]+)/
       );
       if (tweet) {
-        attachments.value.push(TweetComponent(tweet[1]));
+        attachments.value.push(TweetComponent(tweet[0], tweet[1]));
       }
     }
   } catch (_) {}
@@ -193,6 +193,16 @@ export const installTweetContentPlus = () => {
     const content = postElem.find(".post-content")[0];
     const contentWrap = content.parentElement!;
     const attachments = { value: [] };
+
+    if (location.href.search("/status/")) {
+      for (const a of postElem.find("a.post-link-post")) {
+        const parent = a.parentNode!;
+        const span = document.createElement("span");
+        span.append(...a.childNodes);
+        parent.replaceChild(span, a);
+      }
+    }
+
     for (let i = 0; i < content.childNodes.length; ) {
       const node = content.childNodes[i];
 
