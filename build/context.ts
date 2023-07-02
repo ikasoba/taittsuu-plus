@@ -25,4 +25,7 @@ export default await context({
   format: "iife",
   minify: true,
   sourcemap: "linked",
+  loader: {
+    ".css": "text",
+  },
 });

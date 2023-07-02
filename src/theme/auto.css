@@ -1,0 +1,33 @@
+:root {
+  --bg-img: url('../image/sozai/taitsu_back.png');
+  --bg: var(--bg-img) white;
+  --fg: black;
+  --fg-hover: rgba(0, 0, 0, 0.9);
+  --sub-fg: #888;
+
+  --container-bg: rgba(255, 255, 255, 0.8);
+  --container-fg: var(--fg);
+
+  --item-bg: black;
+  --item-fg: white;
+
+  --verify-badge-bg: #1d86ff;
+  --verify-badge-fg: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: var(--bg-img) #444;
+    --fg: white;
+  --fg-hover: rgba(255, 255, 255, 0.9);
+  --sub-fg: rgba(255, 255, 255, 0.8);
+
+    --container-bg: rgba(68, 68, 68, 0.8);
+
+    --item-bg: white;
+    --item-fg: #444;
+
+    --verify-badge-bg: #1d86ff;
+  --verify-badge-fg: white;
+  }
+}

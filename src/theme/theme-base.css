@@ -1,0 +1,49 @@
+body {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+a {
+  color: var(--fg);
+}
+
+*:hover {
+  color: var(--fg-hover);
+}
+
+.profilePanel, .post-header-wrap, #posts, .container-right, .profile-wrap {
+  background: var(--container-bg);
+  color: var(--container-fg);
+}
+
+#profilePanel {
+  background: none;
+}
+
+.profile-infos, .profile-started {
+  color: var(--sub-fg);
+}
+
+.container-right a {
+  color: var(--container-fg);
+}
+
+.btn-primary {
+  background: var(--item-bg) !important;
+  color: var(--item-fg) !important;
+}
+
+.post-button {
+  color: var(--item-bg) !important;
+}
+
+.post-user-badge {
+  color: var(--verify-badge-bg);
+  background: var(--verify-badge-fg);
+  border-radius: 100rem;
+  display: inline-flex;
+}
+
+.post-user-badge > i {
+  transform: scale(1.1);
+}
