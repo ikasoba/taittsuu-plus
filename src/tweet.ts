@@ -190,7 +190,7 @@ export const choice =
 
 export const installTweetContentPlus = () => {
   onAddPost((postElem, post) => {
-    if (location.href.search("/status/")) {
+    if (location.href.search("/status/") >= 0) {
       for (const a of postElem.find("a.post-link-post")) {
         const parent = a.parentNode!;
         const span = document.createElement("span");
