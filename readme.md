@@ -31,14 +31,20 @@
 
   `__` で囲った文字は斜めになります
 
+- テーマ
+
+  ダークテーマとライトテーマのどちらかが選べます
+
 # インストール・アップデート方法
 
 - まず、[tampermonkey](https://www.tampermonkey.net/) 拡張機能をブラウザにインストールします。
 
 - 次に拡張機能アイコンから tampermonkey のダッシュボードを開きます。
+
   ![](./doc/tampermonkey-open-dashboard.png)
 
 - 次にユーティリティタブを開きます。
+
   ![Alt text](./doc/tampermonkey-utility-tab.png)
 
   `URLからインポート`の入力欄へ以下の URL を貼り付け、インストールボタンを押します。
@@ -46,4 +52,5 @@
   https://ikasoba.github.io/taittsuu-plus/index.js
 
 - 画面が変わるので、インストールボタンをもう一度押せば完了です！
+
   ![Alt text](./doc/tampermonkey-install-userscript.png)
