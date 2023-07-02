@@ -33,7 +33,7 @@ a {
   color: var(--item-fg) !important;
 }
 
-.post-button {
+.post-button-off {
   color: var(--item-bg) !important;
 }
 
