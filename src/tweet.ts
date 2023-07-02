@@ -45,8 +45,6 @@ export const createMention = (
   const offset = m?.indices?.[0][0]!;
   const length = m?.indices?.[0][1]! - offset;
 
-  console.log(m, current.value);
-
   const userIdNode = current.value.splitText(offset);
   current.value = userIdNode.splitText(length);
 
@@ -83,8 +81,6 @@ export const createURL = (
 
   const offset = m?.indices?.[0][0]!;
   const length = m?.indices?.[0][1]! - offset;
-
-  console.log(m, current.value);
 
   const urlNode = current.value.splitText(offset);
   current.value = urlNode.splitText(length);
@@ -141,8 +137,6 @@ export const createBold = (
   const offset = m?.indices?.[0][0]!;
   const length = m?.indices?.[0][1]! - offset;
 
-  console.log(m, current.value);
-
   const textNode = current.value.splitText(offset);
   current.value = textNode.splitText(length);
 
@@ -175,8 +169,6 @@ export const createItalic = (
 
   const offset = m?.indices?.[0][0]!;
   const length = m?.indices?.[0][1]! - offset;
-
-  console.log(m, current.value);
 
   const textNode = current.value.splitText(offset);
   current.value = textNode.splitText(length);
@@ -243,8 +235,6 @@ export const installTweetContentPlus = () => {
         i = indexRef.value;
       }
     }
-
-    console.log(attachments);
 
     if (attachments.value.length) {
       contentWrap.after(Attachments(attachments.value));

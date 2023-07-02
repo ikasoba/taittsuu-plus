@@ -16,7 +16,6 @@ export const removeAddPostHandler = (fn: AddPostHandler) => {
   onAddPostHandler.delete(fn);
 };
 
-console.log("install addPost");
 Taittsuu.Post.addPost = function (postsElem, post) {
   const postElem = $("#postBaseElemWrap").children("div:first").clone();
   postElem.find(".post-user-name-value")[0].innerText = post.user_name;
