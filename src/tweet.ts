@@ -190,10 +190,6 @@ export const choice =
 
 export const installTweetContentPlus = () => {
   onAddPost((postElem, post) => {
-    const content = postElem.find(".post-content")[0];
-    const contentWrap = content.parentElement!;
-    const attachments = { value: [] };
-
     if (location.href.search("/status/")) {
       for (const a of postElem.find("a.post-link-post")) {
         const parent = a.parentNode!;
@@ -202,6 +198,10 @@ export const installTweetContentPlus = () => {
         parent.replaceChild(span, a);
       }
     }
+
+    const content = postElem.find(".post-content")[0];
+    const contentWrap = content.parentElement!;
+    const attachments = { value: [] };
 
     for (let i = 0; i < content.childNodes.length; ) {
       const node = content.childNodes[i];
