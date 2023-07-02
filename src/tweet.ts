@@ -63,36 +63,25 @@ export const createMention = (
   return true;
 };
 
-export const createURL = (
+export const createAttachment = (
   node: Node,
   current: { value: Node },
   i: { value: number },
   content: HTMLElement,
   attachments: { value: HTMLElement[] }
 ): boolean => {
-  if (!(current.value instanceof Text)) {
+  console.log(current);
+
+  if (!(current.value instanceof HTMLAnchorElement)) {
     return false;
   }
 
-  const m = current.value.textContent?.match(
-    /(?:https?:\/\/)?(?:[\p{L}_](?:[\p{L}0-9_-]*[\p{L}0-9_])?)(?:\.(?:[\p{L}_](?:[\p{L}0-9_-]*[\p{L}0-9_])?))+(?:\/[^/\r\n]+)*\/?/du
-  );
-  if (!m) {
-    return false;
-  }
-
-  const offset = m?.indices?.[0][0]!;
-  const length = m?.indices?.[0][1]! - offset;
-
-  const urlNode = current.value.splitText(offset);
-  current.value = urlNode.splitText(length);
-
-  const urlText = /^https?:\/\//.test(urlNode.textContent!)
-    ? urlNode.textContent!
-    : "https://" + urlNode.textContent!;
+  const urlText = current.value.href;
 
   try {
     const url = new URL(urlText);
+
+    console.log(url);
 
     if (url.pathname.match(/\.(?:a?png|jpe?g|webp|gif|bmp)/)) {
       attachments.value.push(ImageComponent(urlText));
@@ -105,14 +94,6 @@ export const createURL = (
       }
     }
   } catch (_) {}
-
-  const urlAnchor = document.createElement("a");
-  urlAnchor.href = `${urlText}`;
-  urlAnchor.innerText = urlNode.textContent!;
-
-  content.replaceChild(urlAnchor, urlNode);
-
-  i.value += 1;
 
   return true;
 };
@@ -214,26 +195,29 @@ export const installTweetContentPlus = () => {
     const attachments = { value: [] };
     for (let i = 0; i < content.childNodes.length; i++) {
       const node = content.childNodes[i];
-      if (!(node instanceof Text)) continue;
 
       let current: Node = node;
 
-      while (i < content.childNodes.length) {
-        const currentRef = { value: current };
-        const indexRef = { value: i };
+      const currentRef = { value: current };
+      const indexRef = { value: i };
 
-        const isTransformed = choice([
-          createMention,
-          createURL,
-          createBold,
-          createItalic,
-        ])(node, currentRef, indexRef, content, attachments);
-        if (!isTransformed) break;
+      choice([createMention, createAttachment, createBold, createItalic])(
+        node,
+        currentRef,
+        indexRef,
+        content,
+        attachments
+      );
 
-        current = currentRef.value;
+      current = currentRef.value;
+      if (i == indexRef.value) {
+        i++;
+      } else {
         i = indexRef.value;
       }
     }
+
+    console.log(attachments, contentWrap);
 
     if (attachments.value.length) {
       contentWrap.after(Attachments(attachments.value));

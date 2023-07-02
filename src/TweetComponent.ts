@@ -15,6 +15,7 @@ export function TweetComponent(id: string) {
   wrapper.css("border-radius", "0.5rem");
   wrapper.css("margin", "0.25rem");
   wrapper.css("padding", "0.25rem");
+  wrapper.css("overflow", "hidden");
   wrapper.append(postElem);
 
   queueMicrotask(async () => {
