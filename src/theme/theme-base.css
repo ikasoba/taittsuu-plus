@@ -11,7 +11,7 @@ a {
   color: var(--fg-hover);
 }
 
-.profilePanel, .post-header-wrap, #posts, .container-right, .profile-wrap, .bottom-menus {
+.profilePanel, .post-header-wrap, #posts, .container-right, .profile-wrap, .bottom-menus, .taiitsuDialog, .taiitsuDialogInner {
   background: var(--container-bg);
   color: var(--container-fg);
 }
