@@ -11,9 +11,17 @@ a {
   color: var(--fg-hover);
 }
 
-.profilePanel, .post-header-wrap, #posts, .container-right, .profile-wrap {
+.profilePanel, .post-header-wrap, #posts, .container-right, .profile-wrap, .bottom-menus {
   background: var(--container-bg);
   color: var(--container-fg);
+}
+
+.post-header-menu {
+  display: flex;
+}
+
+.header-title {
+  color: var(--container-fg) !important;
 }
 
 #profilePanel {
@@ -33,8 +41,20 @@ a {
   color: var(--item-fg) !important;
 }
 
+.post-button {
+  color: var(--button-on) !important;
+}
+
 .post-button-off {
-  color: var(--item-bg) !important;
+  color: var(--button-off) !important;
+}
+
+button:hover.post-button * {
+  color: var(--button-off) !important;
+}
+
+button:hover.post-button-off * {
+  color: var(--button-on) !important;
 }
 
 .post-user-badge {
@@ -46,4 +66,8 @@ a {
 
 .post-user-badge > i {
   transform: scale(1.1);
+}
+
+#taittsuu-plus-theme-list {
+  width: 5rem;
 }

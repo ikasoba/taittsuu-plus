@@ -19,7 +19,9 @@ export default await context({
       "// @author       github.com/ikasoba\n" +
       "// @match        https://taittsuu.com/*\n" +
       "// @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==\n" +
-      "// @grant        none\n" +
+      "// @grant        GM_setValue\n" +
+      "// @grant        GM_getValue\n" +
+      "// @grant        GM_deleteValue\n" +
       "// ==/UserScript==\n",
   },
   format: "iife",

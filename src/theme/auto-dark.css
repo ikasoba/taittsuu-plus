@@ -1,0 +1,19 @@
+:root {
+  --bg-img: url('../image/sozai/taitsu_back.png');
+  --bg: var(--bg-img) #444;
+  --fg: white;
+  --fg-hover: rgba(255, 255, 255, 0.9);
+  --sub-fg: rgba(255, 255, 255, 0.8);
+
+  --container-bg: rgba(68, 68, 68, 0.8);
+  --container-fg: var(--fg);
+
+  --item-bg: white;
+  --item-fg: #444;
+
+  --button-on: #f92672;
+  --button-off: var(--item-bg);
+
+  --verify-badge-bg: #1d86ff;
+  --verify-badge-fg: white;
+}

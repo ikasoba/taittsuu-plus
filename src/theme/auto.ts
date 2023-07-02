@@ -1,8 +1,11 @@
 //@ts-ignore
-import autoCss from "./auto.css" assert { type: "text" };
+import autoDarkCss from "./auto-dark.css" assert { type: "text" };
+
+//@ts-ignore
+import autoLightCss from "./auto-light.css" assert { type: "text" };
+import { applyTheme, setDarkTheme, setLightTheme } from "./theme.js";
 
 export const installAutoTheme = () => {
-  const style = document.createElement("style");
-  style.innerHTML = autoCss;
-  document.head.append(style);
+  setLightTheme(autoLightCss);
+  setDarkTheme(autoDarkCss);
 };
