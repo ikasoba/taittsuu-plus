@@ -31,21 +31,35 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: build
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-          cache: pnpm
-      - run: npm i -g pnpm
-      - run: pnpm i
-      - run: pnpm build
+
       - name: Setup Pages
         uses: actions/configure-pages@v3
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload entire repository
           path: ".o/"
+
+      - name: setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
+
+      - name: install dependencies
+        run: pnpm i
+
+      - name: build
+        run: pnpm build
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
