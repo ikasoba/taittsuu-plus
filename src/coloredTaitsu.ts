@@ -14,8 +14,8 @@ export const circleEmojis = [
   "🔵",
   "🟣",
   "🟤",
-  "⚫",
-  "⚪",
+  "🏴",
+  "🏳️",
 ] as const;
 
 export const colorMap: {
@@ -28,8 +28,8 @@ export const colorMap: {
   "🔵": [240, null],
   "🟣": [300, null],
   "🟤": [35, 0.35],
-  "⚫": [0, 0],
-  "⚪": [70, 50],
+  "🏴": [0, 0],
+  "🏳️": [70, 50],
 };
 
 type a = [...(typeof colorMap)[keyof typeof colorMap]];
