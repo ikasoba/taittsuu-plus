@@ -3,8 +3,8 @@ html, body {
   color: var(--fg) !important;
 }
 
-a, .label-text {
-  color: var(--fg);
+a, .label-text, .post-time {
+  color: var(--fg) !important;
 }
 
 a:hover {
