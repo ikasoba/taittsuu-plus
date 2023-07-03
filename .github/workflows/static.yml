@@ -52,8 +52,7 @@ jobs:
         uses: actions/cache/restore@v3
         with:
           path: node_modules
-          key: ${{ runner.os }}-node-modules
-
+          key: ${{ hashFiles('pnpm-lock.yaml') }}-node-modules
       - name: install dependencies
         run: pnpm i --no-frozen-lockfile
 
