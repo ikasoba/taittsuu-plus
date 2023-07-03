@@ -40,7 +40,7 @@ export const installBulkFollowButton = () => {
           if (user.screen_name == TaittsuClient.curentUserId) return;
 
           await TaittsuClient.follow(user.screen_name);
-          button.innerText = `${i}/${list.length}`;
+          button.innerText = `${(i += 1)}/${list.length}`;
         })
       );
       await sleepAsync(1000);
