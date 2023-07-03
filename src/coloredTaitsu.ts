@@ -37,11 +37,14 @@ type a = [...(typeof colorMap)[keyof typeof colorMap]];
 export const installColoredTaitsu = () => {
   onAddPost((postElem, post) => {
     const username = postElem.find(".post-user-name-value");
-    const image = postElem.find(".profile-image");
+    const image = postElem.find(".post-image");
 
     const color: null | (typeof circleEmojis)[number] = username
       .text()
-      .match(new RegExp(`[!！](${circleEmojis.join("|")})`))?.[1] as any;
+      .match(new RegExp(`(${circleEmojis.join("|")})`))?.[1] as any;
+
+    console.log(color, username.text(), image[0]);
+
     if (color == null) return;
 
     image.css("filter", calcTaitsuColor(...colorMap[color]));
