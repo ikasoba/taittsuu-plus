@@ -1,19 +1,34 @@
-body {
+html, body {
   background: var(--bg);
-  color: var(--fg);
+  color: var(--fg) !important;
 }
 
 a {
   color: var(--fg);
 }
 
-*:hover {
-  color: var(--fg-hover);
+a:hover {
+  color: var(--fg-hover) !important;
+}
+
+button {
+  background: var(--fg);
+  color: var(--bg-color);
+}
+
+button:disabled {
+  color: var(--bg-color);
+  background: var(--fg);
+  backdrop-filter: brightness(50%);
 }
 
 .profilePanel, .post-header-wrap, #posts, .container-right, .profile-wrap, .bottom-menus, #taiitsuDialog, #taiitsuDialogInner {
   background: var(--container-bg);
   color: var(--container-fg);
+}
+
+.faq-answer, .top-catch {
+  color: var(--fg) !important;
 }
 
 .post-header-menu {
@@ -57,17 +72,29 @@ button:hover.post-button-off * {
   color: var(--button-on) !important;
 }
 
-.post-user-badge {
+.post-user-badge, .profile-user-badge {
   color: var(--verify-badge-bg);
   background: var(--verify-badge-fg);
   border-radius: 100rem;
   display: inline-flex;
 }
 
-.post-user-badge > i {
+.post-user-badge > i, .profile-user-badge > i {
   transform: scale(1.1);
 }
 
 #taittsuu-plus-theme-list {
   width: 5rem;
+}
+
+.gsc-control-cse, .gsc-control-cse-ja {
+  padding: 0px;
+}
+
+.gstl_50, .gssb_c {
+  color: black;
+}
+
+.profile-content {
+  white-space: pre-line;
 }

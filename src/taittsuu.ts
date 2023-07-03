@@ -1,3 +1,4 @@
+import type { Taittsuu } from "../types/taittsuu.js";
 import { User } from "./User.js";
 import { Tweet } from "./tweet.js";
 
@@ -17,31 +18,6 @@ export const removeAddPostHandler = (fn: AddPostHandler) => {
   onAddPostHandler.delete(fn);
 };
 
-const addPost = Taittsuu.Post.addPost;
-Taittsuu.Post.addPost = function (postsElem, post) {
-  let postElem: JQuery<HTMLElement>;
-
-  const postsElemProxy = new Proxy(postsElem, {
-    get(_, key, __) {
-      if (key == "append") {
-        return (...a: any[]) => {
-          postElem = a[0];
-
-          for (const fn of onAddPostHandler) {
-            fn(postElem, post, postsElem);
-          }
-
-          postsElem.append(...a);
-        };
-      } else {
-        return postsElem[key as any];
-      }
-    },
-  });
-
-  addPost(postsElemProxy, post);
-};
-
 export type AddUserHandler = (
   postElem: JQuery<HTMLElement>,
   post: User,
@@ -58,27 +34,67 @@ export const removeAddUserHandler = (fn: AddUserHandler) => {
   onAddUserHandler.delete(fn);
 };
 
-const addUser = Taittsuu.User.addUser;
-Taittsuu.User.addUser = function (postsElem, post) {
-  let postElem: JQuery<HTMLElement>;
+declare var Taittsuu: Taittsuu | null;
+export default () => {
+  if (Taittsuu == null) {
+    Taittsuu = null;
+  } else {
+    Taittsuu = Taittsuu;
+  }
 
-  const postsElemProxy = new Proxy(postsElem, {
-    get(_, key, __) {
-      if (key == "append") {
-        return (...a: any[]) => {
-          postElem = a[0];
+  console.log(Taittsuu, Taittsuu);
 
-          for (const fn of onAddUserHandler) {
-            fn(postElem, post, postsElem);
+  if (Taittsuu) {
+    const addPost = Taittsuu.Post.addPost;
+    Taittsuu.Post.addPost = function (postsElem, post) {
+      let postElem: JQuery<HTMLElement>;
+
+      const postsElemProxy = new Proxy(postsElem, {
+        get(_, key, __) {
+          if (key == "append") {
+            return (...a: any[]) => {
+              postElem = a[0];
+
+              for (const fn of onAddPostHandler) {
+                fn(postElem, post, postsElem);
+              }
+
+              postsElem.append(...a);
+            };
+          } else {
+            return postsElem[key as any];
           }
+        },
+      });
 
-          postsElem.append(...a);
-        };
-      } else {
-        return postsElem[key as any];
-      }
-    },
-  });
+      addPost(postsElemProxy, post);
+    };
+  }
 
-  addUser(postsElemProxy, post);
+  if (Taittsuu) {
+    const addUser = Taittsuu.User.addUser;
+    Taittsuu.User.addUser = function (postsElem, post) {
+      let postElem: JQuery<HTMLElement>;
+
+      const postsElemProxy = new Proxy(postsElem, {
+        get(_, key, __) {
+          if (key == "append") {
+            return (...a: any[]) => {
+              postElem = a[0];
+
+              for (const fn of onAddUserHandler) {
+                fn(postElem, post, postsElem);
+              }
+
+              postsElem.append(...a);
+            };
+          } else {
+            return postsElem[key as any];
+          }
+        },
+      });
+
+      addUser(postsElemProxy, post);
+    };
+  }
 };

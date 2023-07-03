@@ -1,5 +1,4 @@
 import { User } from "./User.js";
-import cacheStorage from "./cacheStorage.js";
 import { Tweet } from "./tweet.js";
 
 export class TaittsuClient {
@@ -27,7 +26,7 @@ export class TaittsuClient {
     id: string,
     next?: number
   ): Promise<{ data: User[]; next: number }> {
-    const req = new Request(
+    return fetch(
       `https://taittsuu.com/api/v0.1/users/${id}/following?${new URLSearchParams(
         { next: `${next || ""}` }
       ).toString()}`,
@@ -39,29 +38,14 @@ export class TaittsuClient {
         },
         method: "GET",
       }
-    );
-
-    let res: Response;
-    const cache = await (await cacheStorage()).match(req);
-
-    if (cache == null) {
-      res = await fetch(req);
-
-      await (await cacheStorage()).put(req, res);
-
-      res = (await (await cacheStorage()).match(req))!;
-    } else {
-      res = cache;
-    }
-
-    return res.json();
+    ).then((x) => x.json());
   }
 
   static async getFollowers(
     id: string,
     next?: number
   ): Promise<{ data: User[]; next: number }> {
-    const req = new Request(
+    return fetch(
       `https://taittsuu.com/api/v0.1/users/${id}/followers?${new URLSearchParams(
         { next: `${next || ""}` }
       ).toString()}`,
@@ -73,22 +57,45 @@ export class TaittsuClient {
         },
         method: "GET",
       }
-    );
+    ).then((x) => x.json());
+  }
 
-    let res: Response;
-    const cache = await (await cacheStorage()).match(req);
+  static async getAllFollowings(id: string) {
+    const res = [];
+    let next = 0;
 
-    if (cache == null) {
-      res = await fetch(req);
+    while (true) {
+      const list = await this.getFollowings(id, next);
 
-      await (await cacheStorage()).put(req, res);
+      if (list.data.length == 0 || list.next == 0) {
+        break;
+      }
 
-      res = (await (await cacheStorage()).match(req))!;
-    } else {
-      res = cache;
+      next = list.next;
+
+      res.push(...list.data);
     }
 
-    return res.json();
+    return res;
+  }
+
+  static async getAllFollowers(id: string) {
+    const res = [];
+    let next = 0;
+
+    while (true) {
+      const list = await this.getFollowers(id, next);
+
+      if (list.data.length == 0 || list.next == 0) {
+        break;
+      }
+
+      next = list.next;
+
+      res.push(...list.data);
+    }
+
+    return res;
   }
 
   static fetch(path: string) {
@@ -128,14 +135,6 @@ export class TaittsuClient {
   }
 
   static async follow(userId: string) {
-    await (
-      await cacheStorage()
-    ).delete(
-      new URL(
-        `https://taittsuu.com/api/v0.1/users/${this.curentUserId}/following?next=`
-      )
-    );
-
     await fetch(`https://taittsuu.com/api/v0.1/users/following`, {
       headers: {
         "X-API-KEY": Taittsuu.ApiKey,

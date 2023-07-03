@@ -1,6 +1,7 @@
 :root {
   --bg-img: url('../image/sozai/taitsu_back.png');
-  --bg: var(--bg-img) #444;
+  --bg-color: #444;
+  --bg: var(--bg-img) var(--bg-color);
   --fg: white;
   --fg-hover: rgba(255, 255, 255, 0.9);
   --sub-fg: rgba(255, 255, 255, 0.8);

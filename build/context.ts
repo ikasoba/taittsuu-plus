@@ -1,5 +1,8 @@
 import { context } from "esbuild";
 import fs from "node:fs/promises";
+import { PostCssPlugin } from "./plugin/PostCssPlugin.js";
+import cssnano from "cssnano";
+import { ImportURLPlugin } from "@ikasoba000/esbuild-plugin-import-url";
 
 const packageJson: { version: number } = JSON.parse(
   await fs.readFile("./package.json", "utf8")
@@ -27,7 +30,11 @@ export default await context({
   format: "iife",
   minify: true,
   sourcemap: "linked",
-  loader: {
-    ".css": "text",
-  },
+  plugins: [
+    PostCssPlugin({
+      extensions: ["css"],
+      plugins: [cssnano()],
+    }),
+    ImportURLPlugin(".cache"),
+  ],
 });
