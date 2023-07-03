@@ -5,6 +5,12 @@
 タイッツー Plus は tampermonkey で動くユーザースクリプトです。
 もしかしたら greasemonkey でも動くかもしれないです。
 
+# 目次
+
+- [タイッツー Plus の機能](#タイッツー-plus-の機能)
+- [インストール・アップデート方法（パソコン）](#インストール・アップデート方法-パソコン)
+- [インストール・アップデート方法（スマホ）](#インストール・アップデート方法-スマホ)
+
 # タイッツー Plus の機能
 
 - リンク
@@ -37,7 +43,7 @@
 
   ダークテーマとライトテーマのどちらかが選べます
 
-# インストール・アップデート方法（パソコン）
+# インストール・アップデート方法 (パソコン)
 
 - まず、[tampermonkey](https://www.tampermonkey.net/) 拡張機能をブラウザにインストールします。
 
@@ -60,13 +66,14 @@
   ![image](https://github.com/ikasoba/taittsuu-plus/assets/57828948/11450347-439b-44e6-8c0a-cc78b57815fc)
 
 - `Enable Stay Safari Extension.`から、指示に従って拡張機能を有効にします。
+
   - `Tap Here Open Safari` Safari を開きます。
   - `ぁぁ`ボタンから`拡張機能を管理` -> `Stay`を有効化
 
 - `Stay`アプリに戻り、`I am all experienced user, skip for now.`を押す。
 - 警告は`OK`ボタンを押して無視
 
-- 以下のURLを開く
+- 以下の URL を開く
 
   https://ikasoba.github.io/taittsuu-plus/index.js
 
