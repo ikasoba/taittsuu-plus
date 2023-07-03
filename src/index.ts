@@ -11,6 +11,7 @@ import { installTweetDialogPlus } from "./tweetDialog.js";
 import { installBulkFollowButton } from "./bulkFollowButton.js";
 import { installSearchBar } from "./searchBar.js";
 import { installProfileContentPlus } from "./profileContentPlus.js";
+import { installColoredTaitsu } from "./coloredTaitsu.js";
 
 queueMicrotask(async () => {
   avtivateTaitsuuPlusBase();
@@ -22,4 +23,5 @@ queueMicrotask(async () => {
   installBulkFollowButton();
 
   installSearchBar();
+  installColoredTaitsu();
 });
