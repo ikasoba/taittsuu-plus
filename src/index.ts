@@ -22,6 +22,6 @@ queueMicrotask(async () => {
   installTweetDialogPlus();
   installBulkFollowButton();
 
-  installSearchBar();
+  // installSearchBar();
   installColoredTaitsu();
 });

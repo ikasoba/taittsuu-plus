@@ -12,8 +12,10 @@ export const installBulkFollowButton = () => {
 
   const title = $(".container-left > h3");
   const button = document.createElement("button");
+  let next = 0;
+  let count = 1;
 
-  button.innerText = "すべてフォロー";
+  button.innerText = "すべてフォロー " + count;
   button.style.width = "7rem";
   button.style.float = "right";
 
@@ -28,11 +30,11 @@ export const installBulkFollowButton = () => {
 
     button.innerText = `データ取得中`;
 
-    const list = (
-      await (location.pathname.endsWith("following")
-        ? TaittsuClient.getFollowings(userId)
-        : TaittsuClient.getFollowers(userId))
-    )?.data;
+    const res = await (location.pathname.endsWith("following")
+      ? TaittsuClient.getFollowings(userId, next)
+      : TaittsuClient.getFollowers(userId, next));
+
+    const list = res.data;
 
     let i = 0;
 
@@ -47,11 +49,16 @@ export const installBulkFollowButton = () => {
       }
     }
 
+    if (list.length == 0 || res.next == 0) {
+      button.innerText = "すべてフォローしました";
+      return;
+    }
+
     button.innerText = "休憩中";
 
-    await sleepAsync(1000 * 30);
+    await sleepAsync(1000 * 3);
 
-    button.innerText = "すべてフォロー";
+    button.innerText = `すべてフォロー ${count}`;
 
     button.disabled = false;
   });
