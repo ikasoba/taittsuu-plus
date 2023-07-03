@@ -3,7 +3,7 @@ html, body {
   color: var(--fg) !important;
 }
 
-a {
+a, .label-text {
   color: var(--fg);
 }
 
