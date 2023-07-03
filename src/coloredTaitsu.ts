@@ -1,4 +1,5 @@
-import { onAddPost } from "./taittsuu.js";
+import { AddPostHandler, onAddPost } from "./taittsuu.js";
+import { Tweet } from "./tweet.js";
 
 export const calcTaitsuColor = (hue: number, contrast?: number | null) => {
   return `sepia(1) hue-rotate(${(315 + hue) % 360}deg) contrast(${
@@ -35,18 +36,20 @@ export const colorMap: {
 type a = [...(typeof colorMap)[keyof typeof colorMap]];
 
 export const installColoredTaitsu = () => {
-  onAddPost((postElem, post) => {
-    const username = postElem.find(".post-user-name-value");
-    const image = postElem.find(".post-image");
+  onAddPost(dyeingTaitsu);
+};
 
-    const color: null | (typeof circleEmojis)[number] = username
-      .text()
-      .match(new RegExp(`(${circleEmojis.join("|")})`))?.[1] as any;
+export const dyeingTaitsu = (postElem: JQuery<HTMLElement>, post: Tweet) => {
+  const username = postElem.find(".post-user-name-value");
+  const image = postElem.children("a").children(".post-image").slice(0, 1);
 
-    console.log(color, username.text(), image[0]);
+  const color: null | (typeof circleEmojis)[number] = username
+    .text()
+    .match(new RegExp(`(${circleEmojis.join("|")})`))?.[1] as any;
 
-    if (color == null) return;
+  console.log(color, username.text(), image[0]);
 
-    image.css("filter", calcTaitsuColor(...colorMap[color]));
-  });
+  if (color == null) return;
+
+  image.css("filter", calcTaitsuColor(...colorMap[color]));
 };

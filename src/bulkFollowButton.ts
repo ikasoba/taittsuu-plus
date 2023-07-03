@@ -28,22 +28,23 @@ export const installBulkFollowButton = () => {
 
     button.innerText = `データ取得中`;
 
-    const list = await (location.pathname.endsWith("following")
-      ? TaittsuClient.getAllFollowings(userId)
-      : TaittsuClient.getAllFollowers(userId));
+    const list = (
+      await (location.pathname.endsWith("following")
+        ? TaittsuClient.getFollowings(userId)
+        : TaittsuClient.getFollowers(userId))
+    )?.data;
 
     let i = 0;
 
     for (const chunk of toChunk(list, 5)) {
-      await Promise.all(
-        chunk.map(async (user) => {
-          if (user.screen_name == TaittsuClient.curentUserId) return;
+      for (const user of chunk) {
+        if (user.screen_name == TaittsuClient.curentUserId) continue;
 
-          await TaittsuClient.follow(user.screen_name);
-          button.innerText = `${(i += 1)}/${list.length}`;
-        })
-      );
-      await sleepAsync(1000);
+        await TaittsuClient.follow(user.screen_name);
+        button.innerText = `${(i += 1)}/${list.length}`;
+
+        await sleepAsync((1000 * 3) / 5);
+      }
     }
 
     button.innerText = "休憩中";

@@ -1,5 +1,6 @@
 import { User } from "./User.js";
 import { Tweet } from "./tweet.js";
+import { sleepAsync } from "./util.js";
 
 export class TaittsuClient {
   static curentUserId = $("meta[name=my-screen-name]").attr("content")!;
@@ -74,6 +75,8 @@ export class TaittsuClient {
       next = list.next;
 
       res.push(...list.data);
+
+      await sleepAsync(1000 * 3);
     }
 
     return res;
@@ -93,6 +96,8 @@ export class TaittsuClient {
       next = list.next;
 
       res.push(...list.data);
+
+      await sleepAsync(1000 * 3);
     }
 
     return res;

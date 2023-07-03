@@ -1,5 +1,6 @@
 import { post } from "jquery";
 import { TaittsuClient } from "./TaittsuClient.js";
+import { dyeingTaitsu } from "./coloredTaitsu.js";
 
 export function TweetComponent(userId: string, id: string) {
   const postElem = $("#postBaseElemWrap").children("div:first").clone();
@@ -22,6 +23,8 @@ export function TweetComponent(userId: string, id: string) {
     const post = await TaittsuClient.getPost(id);
 
     postElem.find(".post-user-name-value")[0].innerText = post.user_name;
+
+    dyeingTaitsu(postElem, post);
 
     if (post.is_verified) {
       postElem.find(".post-user-badge")[0].style.display = "";
