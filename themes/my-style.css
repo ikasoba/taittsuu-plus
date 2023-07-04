@@ -9,7 +9,7 @@
   --container-bg: rgba(var(--primary-color-red), var(--primary-color-blue), var(--primary-color-green), 0.5);
   --container-fg: var(--fg);
 
-  --border-color: #ccc;
+  --border-color: rgba(var(--primary-color-red), var(--primary-color-blue), var(--primary-color-green), 0.8);
 
   --item-bg: black;
   --item-fg: white;
