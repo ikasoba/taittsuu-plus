@@ -3,23 +3,27 @@ import {
   PlusTheme,
   defaultDarkTheme,
   defaultLightTheme,
+  getPrimaryColor,
+  parseHexColor,
+  setDarkTheme,
+  setLightTheme,
+  setPrimaryColor,
 } from "../theme/theme.js";
 import { h } from "../util.js";
 
-export interface ThemeInfo {
-  type: "dark" | "light";
-  theme: PlusTheme;
-}
-
 export function ThemeInfoComponent(
-  theme: ThemeInfo,
-  themes: { value: ThemeInfo[] },
-  deletable: boolean
+  theme: PlusTheme,
+  themes: { value: PlusTheme[] },
+  editable: boolean
 ) {
+  console.log(theme);
+
   const themeInfo = $(
     h`
     <div class="tp-container">
-      <h3>${theme.theme.name}</h3>
+      <h3>${
+        theme.name + "・" + (theme.type == "light" ? "ライト" : "ダーク")
+      }</h3>
     </div>
     `
   );
@@ -32,85 +36,87 @@ export function ThemeInfoComponent(
         .append(
           $(
             `<option value="url" ${
-              theme.theme.style.type == "url" ? "selected" : ""
+              theme.style.type == "url" ? "selected" : ""
             }>外部CSS</option>`
           ),
           $(
             `<option value="inline" ${
-              theme.theme.style.type == "inline" ? "selected" : ""
+              theme.style.type == "inline" ? "selected" : ""
             }>手書きCSS</option>`
           )
         )
+        .attr("disabled", editable ? null : "")
         .on("change", (event) => {
-          themes.value = JSON.parse(GM_getValue("themes", "[]"));
+          themes.value = GM_getValue("themes", []);
 
           themes.value.some((x) => {
-            if (theme.theme.name == x.theme.name) {
+            if (theme.name == x.name) {
               theme = x;
-              theme.theme.style.type = ("" +
+              theme.style.type = ("" +
                 event.target.selectedOptions[0].value) as any;
               return true;
             }
           });
 
-          GM_setValue("themes", JSON.stringify(themes.value));
+          GM_setValue("themes", themes.value);
         })
     )
   );
 
   themeInfo.append(
     $("<div>").append(
-      (editor = ($("<textarea>") as JQuery<HTMLTextAreaElement>).on(
-        "change",
-        () => {
-          themes = JSON.parse(GM_getValue("themes", "[]"));
+      (editor = ($("<textarea>") as JQuery<HTMLTextAreaElement>)
+        .val(theme.style.value)
+        .css("width", "100%")
+        .css("box-sizing", "border-box")
+        .attr("disabled", editable ? null : "")
+        .on("change", () => {
+          themes.value = GM_getValue("themes", []);
 
-          themes.value.some((x) => {
-            if (theme.theme.name == x.theme.name) {
+          for (const x of themes.value) {
+            if (theme.name == x.name) {
               theme = x;
-              theme.theme.style.value = "" + editor.val();
-              return true;
+              theme.style.value = "" + editor.val();
+              break;
             }
-          });
+          }
 
-          GM_setValue("themes", JSON.stringify(themes.value));
-        }
-      ))
+          console.log(themes);
+
+          GM_setValue("themes", themes.value);
+        }))
     )
   );
 
   themeInfo.append(
-    $("button")
-      .text("🗑️削除")
+    $("<button>")
+      .text("使う")
       .on("click", () => {
-        themes.value = JSON.parse(GM_getValue("themes", "[]"));
-
-        themes.value.some((x, i) => {
-          if (theme.theme.name == x.theme.name) {
-            themes.value.splice(i, 1);
-            return true;
-          }
-        });
-
-        GM_setValue("themes", JSON.stringify(themes.value));
+        if (theme.type == "light") {
+          setLightTheme(theme);
+        } else {
+          setDarkTheme(theme);
+        }
       })
   );
 
-  if (deletable) {
+  if (editable) {
     themeInfo.append(
-      $("button")
+      $("<button>")
         .text("🗑️削除")
         .on("click", () => {
-          themes.value = JSON.parse(GM_getValue("themes", "[]"));
+          themes.value = GM_getValue("themes", []);
 
           themes.value.some((x, i) => {
-            if (theme.theme.name == x.theme.name) {
+            if (theme.name == x.name) {
               themes.value.splice(i, 1);
               return true;
             }
           });
 
-          GM_setValue("themes", JSON.stringify(themes.value));
+          themeInfo.remove();
+
+          GM_setValue("themes", themes.value);
         })
     );
   }
@@ -118,15 +124,85 @@ export function ThemeInfoComponent(
   return themeInfo;
 }
 
-const defaultThemes: { value: ThemeInfo[] } = {
+function ThemeEditorComponent(redrawThemes: () => void) {
+  const editor = $(
+    `<details>
+      <summary>テーマを追加する</summary>
+      <input
+        type="text"
+        style="width: 100%; box-sizing: border-box;"
+        placeholder="テーマの名前"
+      />
+      <select id="fp-themes-type">
+        <option value="light">ライト</option>
+        <option value="dark">ダーク</option>
+      </select>
+      <select id="fp-themes-content-type">
+        <option value="url">外部CSS</option>
+        <option value="inline">手書きCSS</option>
+      </select>
+      <textarea style="width: 100%; box-sizing: border-box;"></textarea>
+      <button>追加</button>
+    </details>`
+  );
+
+  const name = editor.find("input");
+  const themeType = editor.find("#fp-themes-type");
+  const themeContentType = editor.find("#fp-themes-content-type");
+
+  const content = editor.find("textarea");
+
+  editor.find("button").on("click", () => {
+    const themes: PlusTheme[] = GM_getValue("themes", []);
+
+    themes.push({
+      name: "" + name.val(),
+      type: themeType.val() as "light" | "dark",
+      style: {
+        type: themeContentType.val() as "inline" | "url",
+        value: "" + content.val(),
+      },
+    });
+
+    redrawThemes();
+
+    GM_setValue("themes", themes);
+
+    name.val("");
+    content.val("");
+  });
+
+  return editor;
+}
+
+function PrimaryColorPicker() {
+  const { hex } = getPrimaryColor();
+
+  const view = $(`<label>プライマリーカラー：</label>`);
+  const picker = $(`<input type="color" value="#${hex}" />`);
+
+  picker.on("change", () => {
+    const [red, blue, green] = parseHexColor(picker.val() as string);
+
+    setPrimaryColor(red, blue, green);
+  });
+
+  view.append(picker);
+
+  return view;
+}
+
+const defaultThemes: { value: PlusTheme[] } = {
   value: [
+    defaultLightTheme,
+    defaultDarkTheme,
     {
       type: "light",
-      theme: defaultLightTheme,
-    },
-    {
-      type: "dark",
-      theme: defaultDarkTheme,
+      name: "マイスタイル・プライマリーカラー対応",
+      style: {
+        type: "url",
+        value: "https://ikasoba.github.io/taittsuu-plus/themes/my-style.css",
+      },
     },
   ],
 };
@@ -136,8 +212,10 @@ PageRouter.regist("themes", () => {
     `
     <div class="tp-container">
       <h1> タイッツーPlus テーマ </h1>
+      <div id="tp-themes-primary-color"></div>
+      <div id="tp-themes-editor"></div>
       <h2> テーマ一覧 </h2>
-      <div class="tp-container" id="tp-themes">
+      <div id="tp-themes">
       </div>
     </div>
     `
@@ -145,21 +223,26 @@ PageRouter.regist("themes", () => {
 
   const themeList = view.find("#tp-themes");
 
-  let themes: { value: ThemeInfo[] } = {
-    value: JSON.parse(GM_getValue("themes", "[]")),
+  let themes: { value: PlusTheme[] } = {
+    value: GM_getValue("themes", []),
   };
 
-  if (themes.value.length == 0) {
-    themeList.text("現在利用できるテーマはありません");
-  }
+  const drawThemeList = () => {
+    themeList.empty();
 
-  for (let theme of defaultThemes.value) {
-    themeList.append(ThemeInfoComponent(theme, defaultThemes, false));
-  }
+    for (let theme of defaultThemes.value) {
+      themeList.append(ThemeInfoComponent(theme, defaultThemes, false));
+    }
 
-  for (let theme of themes.value) {
-    themeList.append(ThemeInfoComponent(theme, themes, true));
-  }
+    for (let theme of themes.value) {
+      themeList.append(ThemeInfoComponent(theme, themes, true));
+    }
+  };
+
+  drawThemeList();
+
+  view.find("#tp-themes-editor").append(ThemeEditorComponent(drawThemeList));
+  view.find("#tp-themes-primary-color").append(PrimaryColorPicker());
 
   return view[0];
 });

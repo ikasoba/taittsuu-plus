@@ -17,7 +17,6 @@ export const installBulkFollowButton = () => {
 
   button.innerText = "すべてフォロー " + count;
   button.style.width = "7rem";
-  button.style.float = "right";
 
   title.append(button);
 

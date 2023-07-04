@@ -28,6 +28,7 @@ export const scriptContext = await context({
       "// @grant        GM_getValue\n" +
       "// @grant        GM_deleteValue\n" +
       "// @grant        GM.xmlHttpRequest\n" +
+      "// @connect *\n" +
       "// ==/UserScript==\n",
   },
   format: "iife",

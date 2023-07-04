@@ -1,0 +1,38 @@
+:root {
+  --bg-img: url('https://taittsuu.com/image/sozai/taitsu_back.png');
+  --bg-color: white;
+  --bg: var(--bg-img) var(--bg-color);
+  --fg: black;
+  --fg-hover: rgba(0, 0, 0, 0.9);
+  --sub-fg: #888;
+
+  --container-bg: rgba(var(--primary-color-red), var(--primary-color-blue), var(--primary-color-green), 0.5);
+  --container-fg: var(--fg);
+
+  --border-color: #ccc;
+
+  --item-bg: black;
+  --item-fg: white;
+
+  --button-on: #f92672;
+  --button-off: var(--item-bg);
+
+  --verify-badge-bg: #1d86ff;
+  --verify-badge-fg: white;
+}
+
+.container-right, .profile-wrap, #posts, .container-left > .tp-container, .post-header-wrap {
+  backdrop-filter: blur(1rem);
+}
+
+.tp-container {
+  background: none;
+}
+
+.container-left > .tp-container {
+  background: var(--container-bg);
+}
+
+body {
+  background-color: rgba(var(--primary-color-red), var(--primary-color-blue), var(--primary-color-green), 0.25);
+}

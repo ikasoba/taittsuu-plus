@@ -16,7 +16,7 @@ export const sleepAsync = (duration: number) =>
   new Promise<void>((resolve) => setTimeout(resolve, duration));
 
 export function escapeHTML(src: string) {
-  return src.replace(
+  return ("" + src).replace(
     /[&'`"<>]/g,
     (m) => "&x" + m.charCodeAt(0).toString(16) + ";"
   );
