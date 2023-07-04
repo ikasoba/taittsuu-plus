@@ -34,12 +34,12 @@ export const removeAddUserHandler = (fn: AddUserHandler) => {
   onAddUserHandler.delete(fn);
 };
 
-declare var Taittsuu: Taittsuu | null;
+let Taittsuu: Taittsuu | null;
 export default () => {
-  if (Taittsuu == null) {
+  if (unsafeWindow.Taittsuu == null) {
     Taittsuu = null;
   } else {
-    Taittsuu = Taittsuu;
+    Taittsuu = unsafeWindow.Taittsuu;
   }
 
   if (Taittsuu) {

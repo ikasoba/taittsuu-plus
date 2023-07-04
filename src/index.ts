@@ -1,3 +1,5 @@
+(globalThis as any).$ = (unsafeWindow as any).$;
+
 //console.time("theme base");
 import { installThemeBase } from "./theme/theme.js";
 
