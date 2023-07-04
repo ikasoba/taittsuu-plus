@@ -28,6 +28,8 @@ export const scriptContext = await context({
       "// @grant        GM_getValue\n" +
       "// @grant        GM_deleteValue\n" +
       "// @grant        GM.xmlHttpRequest\n" +
+      "// @connect ikasoba.github.io\n" +
+      "// @connect ikasoba.codesk.dev\n" +
       "// @connect *\n" +
       "// ==/UserScript==\n",
   },
