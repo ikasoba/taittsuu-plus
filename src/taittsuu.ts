@@ -42,8 +42,6 @@ export default () => {
     Taittsuu = Taittsuu;
   }
 
-  console.log(Taittsuu, Taittsuu);
-
   if (Taittsuu) {
     const addPost = Taittsuu.Post.addPost;
     Taittsuu.Post.addPost = function (postsElem, post) {

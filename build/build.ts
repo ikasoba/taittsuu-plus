@@ -1,4 +1,5 @@
-import context from "./context.js";
+import { scriptContext, documentContext } from "./context.js";
 
-await context.rebuild();
-await context.dispose();
+await Promise.all([scriptContext.rebuild(), documentContext.rebuild()]);
+
+await Promise.all([scriptContext.dispose(), documentContext.dispose()]);

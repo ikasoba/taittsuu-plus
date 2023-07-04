@@ -47,8 +47,6 @@ export const dyeingTaitsu = (postElem: JQuery<HTMLElement>, post: Tweet) => {
     .text()
     .match(new RegExp(`(${circleEmojis.join("|")})`))?.[1] as any;
 
-  console.log(color, username.text(), image[0]);
-
   if (color == null) return;
 
   image.css("filter", calcTaitsuColor(...colorMap[color]));

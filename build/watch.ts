@@ -1,3 +1,3 @@
-import context from "./context.js";
+import { scriptContext, documentContext } from "./context.js";
 
-await context.watch();
+await Promise.all([scriptContext.watch(), documentContext.watch()]);

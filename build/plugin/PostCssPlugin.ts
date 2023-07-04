@@ -1,4 +1,4 @@
-import { Plugin } from "esbuild";
+import { Loader, Plugin } from "esbuild";
 import postcss, { AcceptedPlugin } from "postcss";
 import fs from "fs/promises";
 
@@ -10,6 +10,7 @@ function escapeRegExp(string: string) {
 export interface PostCssPluginOption {
   extensions: string[];
   plugins: AcceptedPlugin[];
+  loader?: Loader;
 }
 
 export const PostCssPlugin = (option: PostCssPluginOption): Plugin => {
@@ -27,7 +28,7 @@ export const PostCssPlugin = (option: PostCssPluginOption): Plugin => {
         const result = await css.process(content);
         return {
           contents: result.content,
-          loader: "text",
+          loader: option.loader ?? "css",
           pluginName: "PostCssPlugin",
         };
       });

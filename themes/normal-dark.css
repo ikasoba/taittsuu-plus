@@ -1,5 +1,5 @@
 :root {
-  --bg-img: url('../image/sozai/taitsu_back.png');
+  --bg-img: url('https://taittsuu.com/image/sozai/taitsu_back.png');
   --bg-color: #444;
   --bg: var(--bg-img) var(--bg-color);
   --fg: white;
@@ -8,6 +8,8 @@
 
   --container-bg: rgba(68, 68, 68, 0.8);
   --container-fg: var(--fg);
+
+  --border-color: #ccc;
 
   --item-bg: white;
   --item-fg: #444;

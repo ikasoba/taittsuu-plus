@@ -90,8 +90,6 @@ export const createAttachment = (
   content: HTMLElement,
   attachments: { value: HTMLElement[] }
 ): boolean => {
-  console.log(current);
-
   if (!(current.value instanceof HTMLAnchorElement)) {
     return false;
   }
@@ -100,8 +98,6 @@ export const createAttachment = (
 
   try {
     const url = new URL(urlText);
-
-    console.log(url);
 
     if (url.pathname.match(/\.(?:a?png|jpe?g|webp|gif|bmp)/)) {
       attachments.value.push(ImageComponent(urlText));

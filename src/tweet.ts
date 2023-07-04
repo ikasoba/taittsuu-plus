@@ -32,13 +32,9 @@ export const installTweetContentPlus = () => {
       }
     }
 
-    console.log([...postElem.find(".post-content")]);
-
     const content = postElem.find(".post-content")[0];
-    const contentWrap = content.parentElement!;
+    const contentWrap = $(content.parentElement!);
     const attachments = TaittsuDown.render(content);
-
-    console.log(attachments, contentWrap);
 
     if (attachments.length) {
       contentWrap.after(Attachments(attachments));

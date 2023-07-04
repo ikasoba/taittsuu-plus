@@ -22,13 +22,33 @@ button:disabled {
   backdrop-filter: brightness(50%);
 }
 
-.profilePanel, .post-header-wrap, #posts, .container-right, .profile-wrap, .bottom-menus, #taiitsuDialog, #taiitsuDialogInner {
+.profilePanel, .post-header-wrap, #posts, .container-right, .profile-wrap, .bottom-menus, #taiitsuDialog, #taiitsuDialogInner, .post-wrap, .tp-container {
   background: var(--container-bg);
   color: var(--container-fg);
 }
 
+.profile-wrap, #posts, .container-right, .tp-container {
+  border-radius: 4px;
+  border: solid 1px var(--border-color);
+  overflow: hidden;
+}
+
+.tp-container {
+  padding: 1rem;
+}
+
+.tp-container .tp-container {
+  padding: 0.5rem;
+}
+
 .faq-answer, .top-catch {
   color: var(--fg) !important;
+}
+
+.container:has(.post-header-menu) {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .post-header-menu {
@@ -70,6 +90,38 @@ button:hover.post-button * {
 
 button:hover.post-button-off * {
   color: var(--button-on) !important;
+}
+
+.post-wrap {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  border-radius: 0px;
+  border: none;
+  gap: 1rem;
+}
+
+#posts > .post-wrap {
+  border-bottom: solid 1px var(--border-color);
+}
+
+.post-wrap > .posts-main {
+  padding: 0px;
+}
+
+.post-wrap > .post-link-user {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.post-main {
+  padding: 0px;
+}
+
+.post-image {
+  position: relative;
 }
 
 .post-user-badge, .profile-user-badge {

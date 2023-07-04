@@ -1,7 +1,11 @@
 import { installThemeBase } from "./theme/theme.js";
-import { installAutoTheme } from "./theme/auto.js";
+import { activatePageRouter } from "./PageRouter.js";
+
 installThemeBase();
-installAutoTheme();
+
+activatePageRouter();
+
+import "./pages/load.ts";
 
 import avtivateTaitsuuPlusBase from "./taittsuu.js";
 
@@ -9,7 +13,7 @@ import { installReTweetButton } from "./retweet.js";
 import { installTweetContentPlus } from "./tweet.js";
 import { installTweetDialogPlus } from "./tweetDialog.js";
 import { installBulkFollowButton } from "./bulkFollowButton.js";
-import { installSearchBar } from "./searchBar.js";
+import { installRightMenu } from "./RightMenu.js";
 import { installProfileContentPlus } from "./profileContentPlus.js";
 import { installColoredTaitsu } from "./coloredTaitsu.js";
 
@@ -22,6 +26,6 @@ queueMicrotask(async () => {
   installTweetDialogPlus();
   installBulkFollowButton();
 
-  // installSearchBar();
+  installRightMenu();
   installColoredTaitsu();
 });

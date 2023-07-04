@@ -58,7 +58,7 @@ export const installBulkFollowButton = () => {
 
     await sleepAsync(1000 * 3);
 
-    button.innerText = `すべてフォロー ${count}`;
+    button.innerText = `すべてフォロー ${(count += 1)}`;
 
     button.disabled = false;
   });
