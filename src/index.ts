@@ -7,7 +7,6 @@ installThemeBase();
 //console.time("page router");
 import { activatePageRouter } from "./PageRouter.js";
 
-activatePageRouter();
 ////console.timeEnd("page router");
 
 //console.time("override Taittsu");
@@ -25,6 +24,7 @@ import { installProfileContentPlus } from "./profileContentPlus.js";
 import { installColoredTaitsu } from "./coloredTaitsu.js";
 
 queueMicrotask(async () => {
+  activatePageRouter();
   avtivateTaitsuuPlusBase();
 
   installReTweetButton();

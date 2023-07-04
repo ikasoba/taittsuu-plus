@@ -32,6 +32,7 @@ export const scriptContext = await context({
       "// @connect ikasoba.github.io\n" +
       "// @connect ikasoba.codesk.dev\n" +
       "// @connect *\n" +
+      "// @require https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js\n" +
       "// @run-at document-body\n" +
       "// ==/UserScript==\n",
   },
