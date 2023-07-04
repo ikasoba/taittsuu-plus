@@ -52,7 +52,7 @@ jobs:
         uses: actions/cache/restore@v3
         with:
           path: node_modules
-          key: ${{ hashFiles('pnpm-lock.yaml') }}-node-modules
+          key: ${{ hashFiles('package.json') }}-node-modules
       - name: install dependencies
         run: pnpm i --no-frozen-lockfile
 
