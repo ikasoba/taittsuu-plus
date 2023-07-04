@@ -99,7 +99,7 @@ textarea, select {
   color: var(--container-fg);
 }
 
-.btn-primary, textarea, select {
+.btn-primary, select {
   background: var(--item-bg) !important;
   color: var(--item-fg) !important;
 }
