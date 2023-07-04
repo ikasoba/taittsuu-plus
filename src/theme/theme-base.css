@@ -13,7 +13,7 @@ body {
   color: var(--fg) !important;
 }
 
-a, .label-text, .post-time, textarea, select {
+a, .label-text, .post-time {
   color: var(--fg) !important;
 }
 
@@ -51,10 +51,14 @@ input[type="color" i] {
   color: var(--container-fg);
 }
 
-.profile-wrap, #posts, #followUsers, #notices, .container-right, .tp-container {
+.profile-wrap, #posts, #followUsers, #notices, .container-right, .tp-container, textarea, select {
   border-radius: 4px;
   border: solid 1px var(--border-color);
   overflow: hidden;
+}
+
+textarea, select {
+  overflow: auto !important;
 }
 
 .tp-container {
@@ -95,7 +99,7 @@ input[type="color" i] {
   color: var(--container-fg);
 }
 
-.btn-primary {
+.btn-primary, textarea, select {
   background: var(--item-bg) !important;
   color: var(--item-fg) !important;
 }
