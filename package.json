@@ -1,6 +1,6 @@
 {
 	"type": "module",
-	"version": "0.12.2",
+	"version": "0.12.3",
 	"scripts": {
 		"build": "node --loader ts-node/esm build/build.ts",
 		"watch": "node --loader ts-node/esm build/watch.ts"
