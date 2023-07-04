@@ -133,7 +133,7 @@ export const activatePageRouter = () => {
     /^\/home\/?$/.test(location.pathname) &&
     location.hash.startsWith("#" + prefix)
   ) {
-    console.log(true);
+    //console.log(true);
     PageRouter.isRouterActivated = true;
     const pageName = PageRouter.getCurrentPageNameFromHash();
 

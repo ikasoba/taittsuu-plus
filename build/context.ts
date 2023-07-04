@@ -27,15 +27,17 @@ export const scriptContext = await context({
       "// @grant        GM_setValue\n" +
       "// @grant        GM_getValue\n" +
       "// @grant        GM_deleteValue\n" +
+      "// @grant        GM.getValue\n" +
       "// @grant        GM.xmlHttpRequest\n" +
       "// @connect ikasoba.github.io\n" +
       "// @connect ikasoba.codesk.dev\n" +
       "// @connect *\n" +
+      "// @run-at document-body\n" +
       "// ==/UserScript==\n",
   },
   format: "iife",
   minify: true,
-  sourcemap: "linked",
+  ///sourcemap: "linked",
   plugins: [
     //ImportURLPlugin(".cache"),
     PostCssPlugin({

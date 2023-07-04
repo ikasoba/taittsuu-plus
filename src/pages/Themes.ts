@@ -1,3 +1,5 @@
+//console.time("theme draw start");
+
 import { PageRouter } from "../PageRouter.js";
 import {
   PlusTheme,
@@ -8,6 +10,7 @@ import {
   setDarkTheme,
   setLightTheme,
   setPrimaryColor,
+  toHex,
 } from "../theme/theme.js";
 import { h } from "../util.js";
 
@@ -16,7 +19,7 @@ export function ThemeInfoComponent(
   themes: { value: PlusTheme[] },
   editable: boolean
 ) {
-  console.log(theme);
+  //console.log(theme);
 
   const themeInfo = $(
     h`
@@ -81,7 +84,7 @@ export function ThemeInfoComponent(
             }
           }
 
-          console.log(themes);
+          //console.log(themes);
 
           GM_setValue("themes", themes.value);
         }))
@@ -176,7 +179,7 @@ function ThemeEditorComponent(redrawThemes: () => void) {
 }
 
 function PrimaryColorPicker() {
-  const { hex } = getPrimaryColor();
+  const hex = toHex(getPrimaryColor());
 
   const view = $(`<label>プライマリーカラー：</label>`);
   const picker = $(`<input type="color" value="#${hex}" />`);

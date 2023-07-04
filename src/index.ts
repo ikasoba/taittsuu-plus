@@ -1,11 +1,18 @@
+//console.time("theme base");
 import { installThemeBase } from "./theme/theme.js";
-import { activatePageRouter } from "./PageRouter.js";
 
 installThemeBase();
+////console.timeEnd("theme base");
+
+//console.time("page router");
+import { activatePageRouter } from "./PageRouter.js";
 
 activatePageRouter();
+////console.timeEnd("page router");
 
+//console.time("override Taittsu");
 import "./pages/load.ts";
+////console.timeEnd("override Taittsu");
 
 import avtivateTaitsuuPlusBase from "./taittsuu.js";
 

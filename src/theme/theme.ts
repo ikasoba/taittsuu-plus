@@ -1,6 +1,13 @@
 //@ts-ignore
 import themeBaseCss from "./theme-base.css";
 
+const style = document.createElement("style");
+const primaryColorStyle = document.createElement("style");
+const themeElement: HTMLStyleElement = document.createElement("style");
+style.innerHTML = themeBaseCss;
+
+document.head.append(style, primaryColorStyle, themeElement);
+
 export interface PlusTheme {
   type: "light" | "dark";
   name: string;
@@ -33,12 +40,18 @@ export const defaultDarkTheme: PlusTheme = {
   },
 };
 
+//console.time("load theme");
+
 export let lightTheme: PlusTheme = GM_getValue(
   "light_theme",
   defaultLightTheme
 );
 
 export let darkTheme: PlusTheme = GM_getValue("dark_theme", defaultDarkTheme);
+
+////console.timeEnd("load theme");
+
+//console.time("load theme cache");
 
 export let lightThemeCache: string | null = GM_getValue(
   "light_theme_cache",
@@ -50,10 +63,10 @@ export let darkThemeCache: string | null = GM_getValue(
   null
 );
 
+////console.timeEnd("load theme cache");
+
 // -1 auto 0 light 1 dark
 export let currentThemeMode = GM_getValue("theme_id", -1);
-
-export let themeElement: HTMLStyleElement;
 
 export const setLightTheme = (theme: PlusTheme) => {
   if (lightTheme != theme) lightThemeCache = null;
@@ -76,28 +89,36 @@ export const setDarkTheme = (theme: PlusTheme) => {
 };
 
 export const getPrimaryColor = () => {
-  const red = GM_getValue("primary_red", 0);
-  const blue = GM_getValue("primary_blue", 0);
-  const green = GM_getValue("primary_green", 0);
-  const hex = [red, blue, green]
-    .map((x) => x.toString(16).padStart(2, "0"))
-    .join("");
+  const [red, blue, green] = GM_getValue("primary_color", [0, 0, 0]);
 
   return {
     red,
     blue,
     green,
-    hex,
   };
 };
 
-const primaryColorStyle = document.createElement("style");
+export const toHex = ({
+  red,
+  green,
+  blue,
+}: {
+  red: number;
+  blue: number;
+  green: number;
+}) => [red, blue, green].map((x) => x.toString(16).padStart(2, "0")).join("");
 
 export const setPrimaryColor = (red: number, blue: number, green: number) => {
-  GM_setValue("primary_red", red);
-  GM_setValue("primary_blue", blue);
-  GM_setValue("primary_green", green);
+  GM_setValue("primary_color", [red, blue, green]);
 
+  setPrimaryColorCSS(red, blue, green);
+};
+
+export const setPrimaryColorCSS = (
+  red: number,
+  blue: number,
+  green: number
+) => {
   //prettier-ignore
   primaryColorStyle.innerHTML =
       ":root {"
@@ -123,7 +144,8 @@ export const parseHexColor = (hex: string): [number, number, number] => {
 };
 
 export const applyTheme = () => {
-  console.log(lightTheme, darkTheme);
+  //console.time("apply theme");
+  //console.log(lightTheme, darkTheme);
 
   const viewThemeId =
     currentThemeMode == -1
@@ -133,9 +155,9 @@ export const applyTheme = () => {
   const theme = viewThemeId == 0 ? lightTheme : darkTheme;
   let cache = viewThemeId == 0 ? lightThemeCache : darkThemeCache;
 
-  console.log(viewThemeId, currentThemeMode);
+  //console.log(viewThemeId, currentThemeMode);
 
-  console.log(cache);
+  //console.log(cache);
 
   if (theme.style.type == "inline") {
     themeElement.innerHTML = theme.style.value;
@@ -158,50 +180,61 @@ export const applyTheme = () => {
   }
 
   GM_setValue("theme_id", currentThemeMode);
+
+  ////console.timeEnd("apply theme");
 };
 
 export const installThemeBase = () => {
+  //console.time("load primary color");
+
+  //console.time("get primary color");
   const color = getPrimaryColor();
-  setPrimaryColor(color.red, color.blue, color.green);
+  ////console.timeEnd("get primary color");
 
-  document.head.appendChild(primaryColorStyle);
+  //console.time("set primary color css");
+  setPrimaryColorCSS(color.red, color.blue, color.green);
+  ////console.timeEnd("set primary color css");
 
-  const style = document.createElement("style");
-  style.innerHTML = themeBaseCss;
-
-  document.head.append(style);
-
-  themeElement = document.createElement("style");
-  document.head.append(themeElement);
-
-  const themeList = document.createElement("select");
-  const listContent = [
-    ["自動", -1],
-    ["ライト", 0],
-    ["ダーク", 1],
-  ] as const;
-
-  themeList.id = "taittsuu-plus-theme-list";
-
-  for (const [name, value] of listContent) {
-    const item = document.createElement("option");
-
-    item.innerText = name;
-    item.value = "" + value;
-    if (value == currentThemeMode) {
-      item.setAttribute("selected", "true");
-    }
-
-    themeList.append(item);
-  }
+  ////console.timeEnd("load primary color");
 
   applyTheme();
 
-  themeList.addEventListener("change", async () => {
-    currentThemeMode = +themeList.selectedOptions[0].value;
+  ////console.timeEnd("theme draw start");
 
-    applyTheme();
+  requestAnimationFrame(() => {
+    //console.time("put theme mode button");
+
+    const themeList = document.createElement("select");
+    const listContent = [
+      ["自動", -1],
+      ["ライト", 0],
+      ["ダーク", 1],
+    ] as const;
+
+    themeList.id = "taittsuu-plus-theme-list";
+
+    themeList.append(
+      ...listContent.map(([name, value]) => {
+        const item = document.createElement("option");
+
+        item.innerText = name;
+        item.value = "" + value;
+        if (value == currentThemeMode) {
+          item.setAttribute("selected", "true");
+        }
+
+        return item;
+      })
+    );
+
+    themeList.addEventListener("change", async () => {
+      currentThemeMode = +themeList.selectedOptions[0].value;
+
+      applyTheme();
+    });
+
+    $(".post-header-menu").append(themeList);
+
+    ////console.timeEnd("put theme mode button");
   });
-
-  $(".post-header-menu").append(themeList);
 };

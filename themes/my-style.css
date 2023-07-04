@@ -21,7 +21,7 @@
   --verify-badge-fg: white;
 }
 
-.container-right, .profile-wrap, #posts, .container-left > .tp-container, .post-header-wrap {
+.container-right, .profile-wrap, #posts, .container-left > .tp-container, .post-header-wrap, #taiitsuDialogInner {
   backdrop-filter: blur(1rem);
 }
 

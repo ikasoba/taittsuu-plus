@@ -51,7 +51,7 @@ input[type="color" i] {
   color: var(--container-fg);
 }
 
-.profile-wrap, #posts, #followUsers, #notices, .container-right, .tp-container, textarea, select {
+.profile-wrap, #posts, #followUsers, #notices, .container-right, .tp-container, textarea, select, #taiitsuDialogInner {
   border-radius: 4px;
   border: solid 1px var(--border-color);
   overflow: hidden;
