@@ -159,23 +159,28 @@ export const applyTheme = () => {
 
   //console.log(cache);
 
+  console.log(theme.style.value, cache);
+
   if (theme.style.type == "inline") {
     themeElement.innerHTML = theme.style.value;
   } else if (cache) {
     themeElement.innerHTML = cache;
   } else {
-    queueMicrotask(async () => {
-      const res = await GM.xmlHttpRequest<string>({ url: theme.style.value });
+    GM.xmlHttpRequest<string>({
+      url: theme.style.value,
+      onload(res) {
+        const css = res.responseText;
 
-      const css = res.responseText;
+        if (viewThemeId == 0) {
+          lightThemeCache = cache = css;
+        } else {
+          darkThemeCache = cache = css;
+        }
 
-      if (viewThemeId == 0) {
-        lightThemeCache = cache = css;
-      } else {
-        darkThemeCache = cache = css;
-      }
+        console.log(cache);
 
-      themeElement.innerHTML = cache;
+        themeElement.innerHTML = cache;
+      },
     });
   }
 
