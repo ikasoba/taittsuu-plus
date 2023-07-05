@@ -1,12 +1,11 @@
 console.log(globalThis, unsafeWindow);
 
-/*
 //console.time("theme base");
 import { installThemeBase } from "./theme/theme.js";
 
 installThemeBase();
 ////console.timeEnd("theme base");
-
+/*
 //console.time("page router");
 import { activatePageRouter } from "./PageRouter.js";
 
