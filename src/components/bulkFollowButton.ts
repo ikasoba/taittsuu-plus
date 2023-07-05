@@ -1,5 +1,5 @@
-import { TaittsuClient } from "./TaittsuClient.js";
-import { sleepAsync, toChunk } from "./util.js";
+import { TaittsuClient } from "../TaittsuClient.js";
+import { sleepAsync, toChunk } from "../util.js";
 
 export const installBulkFollowButton = () => {
   if (

@@ -1,5 +1,5 @@
 //@ts-ignore
-import themeBaseCss from "./theme-base.css";
+import themeBaseCss from "../../themes/theme-base.css";
 
 const style = document.createElement("style");
 const primaryColorStyle = document.createElement("style");

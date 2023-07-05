@@ -1,5 +1,5 @@
-import { TaittsuDown } from "./TaittsuDown.js";
-import { onAddUser } from "./taittsuu.js";
+import { TaittsuDown } from "../TaittsuDown.js";
+import { onAddUser } from "../taittsuu.js";
 
 export const installProfileContentPlus = () => {
   onAddUser((elm) => {

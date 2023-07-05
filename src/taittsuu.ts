@@ -1,6 +1,6 @@
 import type { Taittsuu } from "../types/taittsuu.js";
 import { User } from "./User.js";
-import { Tweet } from "./tweet.js";
+import { Tweet } from "./types/Tweet.js";
 
 export type AddPostHandler = (
   postElem: JQuery<HTMLElement>,

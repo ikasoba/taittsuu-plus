@@ -1,5 +1,5 @@
 import { User } from "./User.js";
-import { Tweet } from "./tweet.js";
+import { Tweet } from "./types/Tweet.js";
 import { sleepAsync } from "./util.js";
 
 export class TaittsuClient {
@@ -171,3 +171,9 @@ export class TaittsuClient {
 }
 
 (globalThis as any).TaittsuuClient = TaittsuClient;
+
+type TaittsuClientG = typeof TaittsuClient;
+
+declare global {
+  const TaittsuClient: TaittsuClientG;
+}

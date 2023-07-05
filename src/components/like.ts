@@ -1,4 +1,4 @@
-import { onAddPost } from "./taittsuu.js";
+import { onAddPost } from "./types/taittsuu.js";
 import { Tweet, showTweetDialog } from "./tweet.js";
 import { textLimit } from "./util.js";
 

@@ -1,5 +1,5 @@
 import { post } from "jquery";
-import { TaittsuClient } from "./TaittsuClient.js";
+import { TaittsuClient } from "../TaittsuClient.js";
 import { dyeingTaitsu } from "./coloredTaitsu.js";
 
 export function TweetComponent(userId: string, id: string) {

@@ -1,4 +1,4 @@
-import { h } from "./util.js";
+import { h } from "../util.js";
 
 export const installRightMenu = () => {
   $("div.container-right > div:nth-child(5)").after(...SearchBarComponent());
@@ -9,12 +9,13 @@ export function* SearchBarComponent() {
 }
 
 export function Link(icon: string, href: string, text: string) {
+  //prettier-ignore
   return $(
-    h`<div class="mt-1">
-      <a href="${href}" class="decoration-none">
-          <i class="fas w-20 ${icon}"></i>
-          ${text}
-      </a>
-    </div>`
+      '<div class="mt-1">'
+    +   h`<a href="${href}" class="decoration-none">`
+    +       '<i class="fas w-20 ${icon}"></i>'
+    +       h`${text}`
+    +   "</a>"
+    + "</div>"
   );
 }

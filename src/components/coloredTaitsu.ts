@@ -1,5 +1,5 @@
-import { AddPostHandler, onAddPost } from "./taittsuu.js";
-import { Tweet } from "./tweet.js";
+import { AddPostHandler, onAddPost } from "../taittsuu.js";
+import { Tweet } from "../types/Tweet.js";
 
 export const calcTaitsuColor = (hue: number, contrast?: number | null) => {
   return `sepia(1) hue-rotate(${(315 + hue) % 360}deg) contrast(${

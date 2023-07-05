@@ -1,5 +1,5 @@
-import { ImageComponent } from "./ImageComponent.js";
-import { TweetComponent } from "./TweetComponent.js";
+import { ImageComponent } from "./components/ImageComponent.js";
+import { TweetComponent } from "./components/TweetComponent.js";
 
 type Transformer = (
   node: Node,

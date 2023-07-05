@@ -21,14 +21,13 @@ export function ThemeInfoComponent(
 ) {
   //console.log(theme);
 
+  //prettier-ignore
   const themeInfo = $(
-    h`
-    <div class="tp-container">
-      <h3>${
-        theme.name + "・" + (theme.type == "light" ? "ライト" : "ダーク")
-      }</h3>
-    </div>
-    `
+      '<div class="tp-container">'
+    +   h`<h3>${
+          theme.name + "・" + (theme.type == "light" ? "ライト" : "ダーク")
+        }</h3>`
+    + "</div>"
   );
 
   let editor: JQuery<HTMLTextAreaElement>;
@@ -128,25 +127,26 @@ export function ThemeInfoComponent(
 }
 
 function ThemeEditorComponent(redrawThemes: () => void) {
+  //prettier-ignore
   const editor = $(
-    `<details>
-      <summary>テーマを追加する</summary>
-      <input
-        type="text"
-        style="width: 100%; box-sizing: border-box;"
-        placeholder="テーマの名前"
-      />
-      <select id="fp-themes-type">
-        <option value="light">ライト</option>
-        <option value="dark">ダーク</option>
-      </select>
-      <select id="fp-themes-content-type">
-        <option value="url">外部CSS</option>
-        <option value="inline">手書きCSS</option>
-      </select>
-      <textarea style="width: 100%; box-sizing: border-box;"></textarea>
-      <button>追加</button>
-    </details>`
+      "<details>"
+    +   "<summary>テーマを追加する</summary>"
+    +   "<input"
+    +     'type="text"'
+    +     'style="width: 100%; box-sizing: border-box;"'
+    +     'placeholder="テーマの名前"'
+    +   "/>"
+    +   '<select id="fp-themes-type">'
+    +   '<option value="light">ライト</option>'
+    +   '<option value="dark">ダーク</option>'
+    +   "</select>"
+    +   '<select id="fp-themes-content-type">'
+    +     '<option value="url">外部CSS</option>'
+    +     '<option value="inline">手書きCSS</option>'
+    +   "</select>"
+    +   '<textarea style="width: 100%; box-sizing: border-box;"></textarea>'
+    +   "<button>追加</button>"
+    + "</details>"
   );
 
   const name = editor.find("input");
@@ -211,17 +211,16 @@ const defaultThemes: { value: PlusTheme[] } = {
 };
 
 PageRouter.regist("themes", () => {
+  //prettier-ignore
   const view = $(
-    `
-    <div class="tp-container">
-      <h1> タイッツーPlus テーマ </h1>
-      <div id="tp-themes-primary-color"></div>
-      <div id="tp-themes-editor"></div>
-      <h2> テーマ一覧 </h2>
-      <div id="tp-themes">
-      </div>
-    </div>
-    `
+      '<div class="tp-container">'
+    +   "<h1> タイッツーPlus テーマ </h1>"
+    +   '<div id="tp-themes-primary-color"></div>'
+    +   '<div id="tp-themes-editor"></div>'
+    +   "<h2> テーマ一覧 </h2>"
+    +   '<div id="tp-themes">'
+    +   "</div>"
+    + "</div>"
   );
 
   const themeList = view.find("#tp-themes");

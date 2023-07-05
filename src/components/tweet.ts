@@ -1,7 +1,7 @@
 import { ImageComponent } from "./ImageComponent.js";
-import { Attachments, TaittsuDown } from "./TaittsuDown.js";
+import { Attachments, TaittsuDown } from "../TaittsuDown.js";
 import { TweetComponent } from "./TweetComponent.js";
-import { onAddPost } from "./taittsuu.js";
+import { onAddPost } from "../taittsuu.js";
 
 export const showTweetDialog = (content?: string) => {
   if (content != null) {
@@ -11,15 +11,6 @@ export const showTweetDialog = (content?: string) => {
 
   Taittsuu.Post.showTaiitsuDialog();
 };
-
-export interface Tweet {
-  content: string;
-  created_at: string;
-  id: number;
-  is_verified: number;
-  user_name: string;
-  user_screenname: string;
-}
 
 export const installTweetContentPlus = () => {
   onAddPost((postElem, post) => {

@@ -1,5 +1,6 @@
 console.log(globalThis, unsafeWindow);
 
+/*
 //console.time("theme base");
 import { installThemeBase } from "./theme/theme.js";
 
@@ -14,16 +15,17 @@ import { activatePageRouter } from "./PageRouter.js";
 //console.time("override Taittsu");
 import "./pages/load.ts";
 ////console.timeEnd("override Taittsu");
+*/
 
 import avtivateTaitsuuPlusBase from "./taittsuu.js";
 
-import { installReTweetButton } from "./retweet.js";
-import { installTweetContentPlus } from "./tweet.js";
-import { installTweetDialogPlus } from "./tweetDialog.js";
-import { installBulkFollowButton } from "./bulkFollowButton.js";
-import { installRightMenu } from "./RightMenu.js";
-import { installProfileContentPlus } from "./profileContentPlus.js";
-import { installColoredTaitsu } from "./coloredTaitsu.js";
+import { installReTweetButton } from "./components/retweet.js";
+import { installTweetContentPlus } from "./components/tweet.js";
+import { installTweetDialogPlus } from "./components/tweetDialog.js";
+import { installBulkFollowButton } from "./components/bulkFollowButton.js";
+import { installRightMenu } from "./components/RightMenu.js";
+import { installProfileContentPlus } from "./components/profileContentPlus.js";
+import { installColoredTaitsu } from "./components/coloredTaitsu.js";
 
 queueMicrotask(async () => {
   activatePageRouter();
