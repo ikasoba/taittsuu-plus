@@ -1,12 +1,4 @@
-:root {
-  --bg: transparent;
-}
 
-@media (prefers-color-scheme: dark) {
-  html {
-    background: black;
-  }
-}
 
 body {
   background: var(--bg);
