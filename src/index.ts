@@ -28,7 +28,7 @@ import { installProfileContentPlus } from "./components/profileContentPlus.js";
 import { installColoredTaitsu } from "./components/coloredTaitsu.js";
 
 queueMicrotask(async () => {
-  activatePageRouter();
+  //activatePageRouter();
   avtivateTaitsuuPlusBase();
 
   installReTweetButton();
