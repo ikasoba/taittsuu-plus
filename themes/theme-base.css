@@ -140,7 +140,7 @@ button:hover.post-rt-button.post-button-off * {
   color: var(--button-rt-on) !important;
 }
 
-button:hover.post-button-off * {
+button.post-button-off {
   color: var(--button-off) !important;
 }
 
