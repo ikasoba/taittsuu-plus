@@ -140,6 +140,10 @@ button:hover.post-rt-button.post-button-off * {
   color: var(--button-rt-on) !important;
 }
 
+button:hover.post-button-off * {
+  color: var(--button-off) !important;
+}
+
 .post-wrap, .notice-wrap {
   padding: 0.5rem;
   display: flex;
