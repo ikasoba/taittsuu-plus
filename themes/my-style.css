@@ -26,7 +26,6 @@
   backdrop-filter: blur(1rem);
 }
 
-
 body {
   background-color: rgba(var(--primary-color-red), var(--primary-color-blue), var(--primary-color-green), 0.25);
 }
