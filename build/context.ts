@@ -3,7 +3,7 @@ import fs from "node:fs/promises";
 import { PostCssPlugin } from "./plugin/PostCssPlugin.js";
 import cssnano from "cssnano";
 import { MarkdownPlugin } from "./plugin/MarkdownPlugin.js";
-import { globby as glob } from "globby";
+import { globby as glob, globby } from "globby";
 import { copy as CopyPlugin } from "esbuild-plugin-copy";
 
 const packageJson: { version: number } = JSON.parse(
@@ -11,7 +11,7 @@ const packageJson: { version: number } = JSON.parse(
 );
 
 export const scriptContext = await context({
-  entryPoints: ["src/index.ts"],
+  entryPoints: ["src/index.ts", ...(await glob("./src/features/*"))],
   bundle: true,
   outdir: "./.o",
   banner: {
@@ -33,12 +33,13 @@ export const scriptContext = await context({
       "// @connect ikasoba.github.io\n" +
       "// @connect ikasoba.codesk.dev\n" +
       "// @connect *\n" +
-      //"// @require https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js\n" +
       //"// @run-at document-body\n" +
-      "// ==/UserScript==\n",
+      "// ==/UserScript==\n" +
+      "gmExports = this;",
   },
   format: "iife",
-  minify: true,
+  minify: false,
+  target: "es2018",
   ///sourcemap: "linked",
   plugins: [
     //ImportURLPlugin(".cache"),

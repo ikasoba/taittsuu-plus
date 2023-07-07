@@ -1,6 +1,7 @@
-import { onAddPost } from "./types/taittsuu.js";
-import { Tweet, showTweetDialog } from "./tweet.js";
-import { textLimit } from "./util.js";
+import { onAddPost } from "../taittsuu.js";
+import { Tweet } from "../types/Tweet.js";
+import { showTweetDialog } from "./tweet.js";
+import { textLimit } from "../util.js";
 
 export const installLikeButton = () => {
   onAddPost((postElem, post) => {

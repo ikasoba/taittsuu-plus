@@ -175,11 +175,3 @@ export class TaittsuClient {
     });
   }
 }
-
-(globalThis as any).TaittsuuClient = TaittsuClient;
-
-type TaittsuClientG = typeof TaittsuClient;
-
-declare global {
-  const TaittsuClient: TaittsuClientG;
-}

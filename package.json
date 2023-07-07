@@ -1,8 +1,9 @@
 {
 	"type": "module",
-	"version": "0.13.1",
+	"version": "0.14.0",
 	"scripts": {
 		"build": "node --loader ts-node/esm build/build.ts",
+		"build-dev": "node --loader ts-node/esm build/build.ts http://localhost:8334",
 		"watch": "node --loader ts-node/esm build/watch.ts"
 	},
 	"devDependencies": {
@@ -24,6 +25,7 @@
 	"dependencies": {
 		"@mdx-js/preact": "^2.3.0",
 		"@mdx-js/react": "^2.3.0",
+		"@popperjs/core": "^2.11.8",
 		"@types/react": "^18.2.14",
 		"marked": "^5.1.0",
 		"preact": "^10.15.1"
