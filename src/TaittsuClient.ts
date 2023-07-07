@@ -10,55 +10,61 @@ export class TaittsuClient {
     next: undefined,
   };
 
-  static getPost(id: string): Promise<Tweet> {
-    return fetch(`https://taittsuu.com/api/v0.1/taiitsus/${id}`, {
-      headers: {
-        "X-API-KEY": Taittsuu.ApiKey,
-        "X-ACCESS-TOKEN": $("meta[name='access-token']").attr("content")!,
-        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")!,
-      },
-      method: "GET",
-    })
-      .then((x) => x.json())
-      .then((x) => x.data[0]);
+  static async getPost(id: string): Promise<Tweet> {
+    return (
+      await (
+        await fetch(`https://taittsuu.com/api/v0.1/taiitsus/${id}`, {
+          headers: {
+            "X-API-KEY": Taittsuu.ApiKey,
+            "X-ACCESS-TOKEN": $("meta[name='access-token']").attr("content")!,
+            "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")!,
+          },
+          method: "GET",
+        })
+      ).json()
+    ).data[0];
   }
 
   static async getFollowings(
     id: string,
     next?: number
   ): Promise<{ data: User[]; next: number }> {
-    return fetch(
-      `https://taittsuu.com/api/v0.1/users/${id}/following?${new URLSearchParams(
-        { next: `${next || ""}` }
-      ).toString()}`,
-      {
-        headers: {
-          "X-API-KEY": Taittsuu.ApiKey,
-          "X-ACCESS-TOKEN": $("meta[name='access-token']").attr("content")!,
-          "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")!,
-        },
-        method: "GET",
-      }
-    ).then((x) => x.json());
+    return (
+      await fetch(
+        `https://taittsuu.com/api/v0.1/users/${id}/following?${new URLSearchParams(
+          { next: `${next || ""}` }
+        ).toString()}`,
+        {
+          headers: {
+            "X-API-KEY": Taittsuu.ApiKey,
+            "X-ACCESS-TOKEN": $("meta[name='access-token']").attr("content")!,
+            "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")!,
+          },
+          method: "GET",
+        }
+      )
+    ).json();
   }
 
   static async getFollowers(
     id: string,
     next?: number
   ): Promise<{ data: User[]; next: number }> {
-    return fetch(
-      `https://taittsuu.com/api/v0.1/users/${id}/followers?${new URLSearchParams(
-        { next: `${next || ""}` }
-      ).toString()}`,
-      {
-        headers: {
-          "X-API-KEY": Taittsuu.ApiKey,
-          "X-ACCESS-TOKEN": $("meta[name='access-token']").attr("content")!,
-          "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")!,
-        },
-        method: "GET",
-      }
-    ).then((x) => x.json());
+    return (
+      await fetch(
+        `https://taittsuu.com/api/v0.1/users/${id}/followers?${new URLSearchParams(
+          { next: `${next || ""}` }
+        ).toString()}`,
+        {
+          headers: {
+            "X-API-KEY": Taittsuu.ApiKey,
+            "X-ACCESS-TOKEN": $("meta[name='access-token']").attr("content")!,
+            "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")!,
+          },
+          method: "GET",
+        }
+      )
+    ).json();
   }
 
   static async getAllFollowings(id: string) {
@@ -168,12 +174,4 @@ export class TaittsuClient {
       }),
     });
   }
-}
-
-(globalThis as any).TaittsuuClient = TaittsuClient;
-
-type TaittsuClientG = typeof TaittsuClient;
-
-declare global {
-  const TaittsuClient: TaittsuClientG;
 }

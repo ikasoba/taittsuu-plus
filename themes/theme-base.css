@@ -53,12 +53,19 @@ textarea, select {
   overflow: auto !important;
 }
 
+.tp-flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
 .tp-container {
   padding: 1rem;
 }
 
 .tp-container .tp-container {
   padding: 0.5rem;
+  background: none;
+  backdrop-filter: none;
 }
 
 .faq-answer, .top-catch {
@@ -87,6 +94,11 @@ textarea, select {
   color: var(--sub-fg);
 }
 
+.post-rt-source {
+  background: var(--sub-fg);
+  color: var(--item-fg);
+}
+
 .container-right a {
   color: var(--container-fg);
 }
@@ -96,23 +108,39 @@ textarea, select {
   color: var(--item-fg) !important;
 }
 
-.post-button {
+.post-like-button.post-button {
   color: var(--button-on) !important;
 }
 
-.post-button-off {
+.post-like-button.post-button-off {
   color: var(--button-off) !important;
 }
 
-button:hover.post-button * {
+button:hover.post-like-button.post-button * {
   color: var(--button-off) !important;
 }
 
-button:hover.post-button-off * {
+button:hover.post-like-button.post-button-off * {
   color: var(--button-on) !important;
 }
 
-.post-wrap {
+.post-rt-button.post-button {
+  color: var(--button-on) !important;
+}
+
+.post-rt-button.post-button-off {
+  color: var(--button-off) !important;
+}
+
+button:hover.post-rt-button.post-button * {
+  color: var(--button-off) !important;
+}
+
+button:hover.post-rt-button.post-button-off * {
+  color: var(--button-on) !important;
+}
+
+.post-wrap, .notice-wrap {
   padding: 0.5rem;
   display: flex;
   flex-direction: row-reverse;
@@ -174,4 +202,8 @@ button:hover.post-button-off * {
 
 .profile-content {
   white-space: pre-line;
+}
+
+*[hidden] {
+  display: none;
 }

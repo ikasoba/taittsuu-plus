@@ -12,7 +12,7 @@ export function TweetComponent(userId: string, id: string) {
   postElem.find(".post-button").remove();
 
   const wrapper = $("<div></div>");
-  wrapper.css("border", "1px solid lightgray");
+  wrapper.addClass("tp-container");
   wrapper.css("border-radius", "0.5rem");
   wrapper.css("margin", "0.25rem");
   wrapper.css("padding", "0.25rem");

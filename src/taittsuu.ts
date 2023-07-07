@@ -2,13 +2,20 @@ import type { Taittsuu } from "../types/taittsuu.js";
 import { User } from "./User.js";
 import { Tweet } from "./types/Tweet.js";
 
+declare global {
+  var $tpOnAddPostHandler: Set<AddPostHandler>;
+  var $tpOnAddUserHandler: Set<AddUserHandler>;
+}
+
 export type AddPostHandler = (
   postElem: JQuery<HTMLElement>,
   post: Tweet,
   postsElem: JQuery<HTMLElement>
 ) => void;
 
-const onAddPostHandler: Set<AddPostHandler> = new Set();
+const onAddPostHandler: Set<AddPostHandler> =
+  globalThis.$tpOnAddPostHandler ??
+  (globalThis.$tpOnAddPostHandler = new Set());
 
 export const onAddPost = (fn: AddPostHandler) => {
   onAddPostHandler.add(fn);
@@ -24,7 +31,9 @@ export type AddUserHandler = (
   postsElem: JQuery<HTMLElement>
 ) => void;
 
-const onAddUserHandler: Set<AddUserHandler> = new Set();
+const onAddUserHandler: Set<AddUserHandler> =
+  globalThis.$tpOnAddUserHandler ??
+  (globalThis.$tpOnAddUserHandler = new Set());
 
 export const onAddUser = (fn: AddUserHandler) => {
   onAddUserHandler.add(fn);

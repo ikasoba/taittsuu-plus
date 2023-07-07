@@ -131,7 +131,7 @@ function ThemeEditorComponent(redrawThemes: () => void) {
   const editor = $(
       "<details>"
     +   "<summary>テーマを追加する</summary>"
-    +   "<input"
+    +   "<input "
     +     'type="text"'
     +     'style="width: 100%; box-sizing: border-box;"'
     +     'placeholder="テーマの名前"'
@@ -230,6 +230,10 @@ PageRouter.regist("themes", () => {
   };
 
   const drawThemeList = () => {
+    themes = {
+      value: GM_getValue("themes", []),
+    };
+
     themeList.empty();
 
     for (let theme of defaultThemes.value) {

@@ -167,6 +167,8 @@ export const applyTheme = () => {
     themeElement.innerHTML = cache;
   } else {
     GM.xmlHttpRequest<string>({
+      nocache: true,
+      revalidate: true,
       url: theme.style.value,
       onload(res) {
         const css = res.responseText;

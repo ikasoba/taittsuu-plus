@@ -14,7 +14,8 @@
   --item-bg: black;
   --item-fg: white;
 
-  --button-on: #f92672;
+  --button-like-on: #f92672;
+  --button-rt-on: #00db80;
   --button-off: var(--item-bg);
 
   --verify-badge-bg: #1d86ff;

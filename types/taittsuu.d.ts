@@ -6,6 +6,7 @@ export interface Taittsuu {
     showTaiitsuDialog(): void;
     hideTaiitsuDialog(): void;
     addPost(postsElm: JQuery<HTMLElement>, post: Tweet): void;
+    reTaiitsu(elm: JQuery<HTMLElement>): void;
   };
 
   User: {
