@@ -150,11 +150,11 @@ button:hover.post-rt-button.post-button-off * {
   gap: 0.5rem;
 }
 
-#posts > .post-wrap {
+#posts > .post-wrap, #notices > .notice-wrap {
   border-bottom: solid 1px var(--border-color);
 }
 
-#posts > .post-wrap:last-child {
+#posts > .post-wrap:last-child, #notices > .notice-wrap {
   border-bottom: none;
 }
 
