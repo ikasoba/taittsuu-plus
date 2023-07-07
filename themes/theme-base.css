@@ -109,7 +109,7 @@ textarea, select {
 }
 
 .post-like-button.post-button {
-  color: var(--button-on) !important;
+  color: var(--button-like-on) !important;
 }
 
 .post-like-button.post-button-off {
@@ -121,11 +121,11 @@ button:hover.post-like-button.post-button * {
 }
 
 button:hover.post-like-button.post-button-off * {
-  color: var(--button-on) !important;
+  color: var(--button-like-on) !important;
 }
 
 .post-rt-button.post-button {
-  color: var(--button-on) !important;
+  color: var(--button-rt-on) !important;
 }
 
 .post-rt-button.post-button-off {
@@ -137,7 +137,7 @@ button:hover.post-rt-button.post-button * {
 }
 
 button:hover.post-rt-button.post-button-off * {
-  color: var(--button-on) !important;
+  color: var(--button-rt-on) !important;
 }
 
 .post-wrap, .notice-wrap {
