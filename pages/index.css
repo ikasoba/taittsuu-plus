@@ -33,7 +33,7 @@ li {
 }
 
 table {
-  border: solid 1px #444;
+  border: solid 1px lightgrey;
   border-radius: 0.25rem;
   border-spacing: 0px;
   overflow: hidden;
@@ -41,7 +41,7 @@ table {
 
 td, th {
   padding: 0.3rem;
-  border-bottom: solid 1px #444;
+  border-bottom: solid 1px lightgrey;
 }
 
 th {
@@ -49,7 +49,7 @@ th {
 }
 
 tr > td:nth-child(2n), tr > th:nth-child(2n) {
-  border-left: solid 1px #444;
+  border-left: solid 1px lightgrey;
 }
 
 tbody > tr:last-child > td {
