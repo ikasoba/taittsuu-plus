@@ -77,6 +77,9 @@ URL っぽい文字列をリンクへ変換
 
 # インストール・アップデート方法 (スマホ)
 
+筆者はAndroidを所有していないので、iOSでのみの紹介となります。
+AndroidのFirefoxは拡張機能が使えるらしいのでそこからTampermonkeyなどを選べば導入できるかも？
+
 - まず、 [Stay](https://apps.apple.com/jp/app/stay-safari-companion/id1591620171) というアプリを入れます。
 
   ![image](https://github.com/ikasoba/taittsuu-plus/assets/57828948/11450347-439b-44e6-8c0a-cc78b57815fc)
