@@ -2,6 +2,8 @@
 
 作者: [いかそば](https://taittsuu.com/users/ikasoba000)
 
+github リポジトリ: [ikasoba/taittsu-plus](https://github.com/ikasoba/taittsuu-plus/)
+
 タイッツー Plus は tampermonkey で動くユーザースクリプトです。
 もしかしたら greasemonkey でも動くかもしれないです。
 
