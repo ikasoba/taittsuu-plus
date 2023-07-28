@@ -243,7 +243,6 @@ export function Attachments(attachments: HTMLElement[]) {
 
   container.style.borderRadius = "0.5rem";
   container.style.width = "100%";
-  container.style.aspectRatio = "16 / 9";
   container.style.display = "grid";
   container.style.gridTemplateColumns = "repeat(auto-fit, minmax(50%, 1fr)";
   container.style.gridTemplateRows = "repeat(auto-fit, minmax(50%, 1fr)";
