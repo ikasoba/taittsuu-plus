@@ -178,7 +178,7 @@ button.post-button-off {
 }
 
 .post-image {
-  position: relative;
+  position: initial;
 }
 
 .post-user-badge, .profile-user-badge {
