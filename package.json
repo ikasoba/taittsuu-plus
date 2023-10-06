@@ -1,33 +1,33 @@
 {
-	"type": "module",
-	"version": "0.14.0",
-	"scripts": {
-		"build": "node --loader ts-node/esm build/build.ts",
-		"build-dev": "node --loader ts-node/esm build/build.ts http://localhost:8334",
-		"watch": "node --loader ts-node/esm build/watch.ts"
-	},
-	"devDependencies": {
-		"@chialab/esbuild-plugin-html": "^0.17.3",
-		"@ikasoba000/esbuild-plugin-import-url": "^0.1.0",
-		"@mdx-js/esbuild": "^2.3.0",
-		"@types/jquery": "^3.5.16",
-		"@types/marked": "^5.0.0",
-		"@types/node": "^20.3.3",
-		"@types/tampermonkey": "^4.0.10",
-		"cssnano": "^6.0.1",
-		"esbuild": "^0.18.11",
-		"esbuild-plugin-copy": "^2.1.1",
-		"globby": "^13.2.0",
-		"postcss": "^8.4.24",
-		"ts-node": "^10.9.1",
-		"typescript": "^5.1.6"
-	},
-	"dependencies": {
-		"@mdx-js/preact": "^2.3.0",
-		"@mdx-js/react": "^2.3.0",
-		"@popperjs/core": "^2.11.8",
-		"@types/react": "^18.2.14",
-		"marked": "^5.1.0",
-		"preact": "^10.15.1"
-	}
+  "type": "module",
+  "version": "0.14.2",
+  "scripts": {
+    "build": "node --loader ts-node/esm build/build.ts",
+    "build-dev": "node --loader ts-node/esm build/build.ts http://localhost:8334",
+    "watch": "node --loader ts-node/esm build/watch.ts"
+  },
+  "devDependencies": {
+    "@chialab/esbuild-plugin-html": "^0.17.3",
+    "@ikasoba000/esbuild-plugin-import-url": "^0.1.0",
+    "@mdx-js/esbuild": "^2.3.0",
+    "@types/jquery": "^3.5.16",
+    "@types/marked": "^5.0.0",
+    "@types/node": "^20.3.3",
+    "@types/tampermonkey": "^4.0.10",
+    "cssnano": "^6.0.1",
+    "esbuild": "^0.18.11",
+    "esbuild-plugin-copy": "^2.1.1",
+    "globby": "^13.2.0",
+    "postcss": "^8.4.24",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@mdx-js/preact": "^2.3.0",
+    "@mdx-js/react": "^2.3.0",
+    "@popperjs/core": "^2.11.8",
+    "@types/react": "^18.2.14",
+    "marked": "^5.1.0",
+    "preact": "^10.15.1"
+  }
 }
