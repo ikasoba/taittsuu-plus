@@ -13,6 +13,11 @@ a:hover {
   color: var(--fg-hover) !important;
 }
 
+.taiitsu-red-comment, .coupon-description {
+  color: var(--fg) !important;
+  font-weight: bold;
+}
+
 button {
   background: var(--fg);
   color: var(--bg-color);
@@ -38,9 +43,15 @@ input[type="color" i] {
   padding: 0px;
 }
 
-.profilePanel, .post-header-wrap, .container-right, .profile-wrap, .bottom-menus, #taiitsuDialog, #taiitsuDialogInner, #posts, #followUsers, .tp-container {
+.profilePanel, .post-header-wrap, .container-right, .profile-wrap, .bottom-menus, #taiitsuDialog, #taiitsuDialogInner, #posts, #followUsers, .tp-container, #postMenuDialogInner, #profileMenuDialogInner, #taiitsuRangeAndTypeDialogInner, .taiitsuDetailWrap {
   background: var(--container-bg);
   color: var(--container-fg);
+}
+
+.coupon-item {
+  border-color: var(--border-color) !important;
+  background: var(--container-bg) !important;
+  color: var(--container-fg) !important;
 }
 
 .profile-wrap, #posts, #followUsers, #notices, .container-right, .tp-container, textarea, select, #taiitsuDialogInner {
@@ -210,4 +221,17 @@ button.post-button-off {
 
 *[hidden] {
   display: none;
+}
+
+.login-bonus-panel {
+  background-color: var(--container-bg);
+  color: var(--container-fg);
+}
+
+.reply-range-image {
+  filter: invert(1) brightness(1.5);
+}
+
+.terms-point a {
+  color: #272727 !important;
 }

@@ -30,27 +30,54 @@ export class PageRouter {
   private static currentComponentView: HTMLElement | null = null;
   private static pages = new Map<string, Component>();
   private static _bookedTransition: string | null = null;
-  private static prevContainerChildren = $(
-    ".page-main-container > .container-left"
-  ).children();
+
+  static container = $("<div></div>");
 
   static isRouterActivated = false;
 
-  static {
-    $(".page-main-container > .container-left").on("change", () => {
-      if (this.currentComponentView != null) return;
+  static getContainerLeft() {
+    return document.querySelector("main > .container > .container-right")
+      ?.previousElementSibling as HTMLDivElement | undefined;
+  }
 
-      this.prevContainerChildren = $(
-        ".page-main-container > .container-left"
-      ).children();
+  static getContainerRight() {
+    return document.querySelector<HTMLDivElement>(
+      "main > .container > .container-right"
+    );
+  }
+
+  static {
+    PageRouter.container.css("position", "absolute");
+    PageRouter.container.css("display", "none");
+
+    const resizeObserver = new ResizeObserver(() => {
+      const left = PageRouter.getContainerLeft();
+
+      if (!left) return;
+
+      const rect = left.getBoundingClientRect();
+
+      PageRouter.container.css("top", rect.top + "px");
+      PageRouter.container.css("left", rect.left + "px");
+      PageRouter.container.css("width", rect.width + "px");
     });
+
+    resizeObserver.observe(document.querySelector("main > .container")!);
+
+    $(document.body).append(PageRouter.container);
 
     $(window).on("hashchange", () => {
       if (!location.hash.startsWith("#" + prefix)) {
+        const left = PageRouter.getContainerLeft();
+
         this.currentComponentView = null;
-        $(".page-main-container > .container-left")
-          .empty()
-          .append(this.prevContainerChildren);
+        PageRouter.container.css("display", "none");
+
+        if (left) {
+          left.style.opacity = "1";
+          left.style.pointerEvents = "auto";
+        }
+
         return;
       }
 
@@ -82,8 +109,17 @@ export class PageRouter {
 
     const pageComponent = this.pages.get(pageName);
 
+    const left = PageRouter.getContainerLeft();
+
+    if (left) {
+      left.style.opacity = "0";
+      left.style.pointerEvents = "none";
+    }
+
+    PageRouter.container.css("display", "block");
+
     if (pageComponent == null) {
-      $(".page-main-container > .container-left")
+      PageRouter.container
         .empty()
         .append(
           $("<h1></h1>")
@@ -118,7 +154,7 @@ export class PageRouter {
     disMountHandler = null;
 
     const view = component();
-    $(".page-main-container > .container-left").empty().append(view);
+    PageRouter.container.empty().append(view);
 
     this.currentComponentView = view;
   }

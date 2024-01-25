@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "version": "0.14.2",
+  "version": "0.15.0",
   "scripts": {
     "build": "node --loader ts-node/esm build/build.ts",
     "build-dev": "node --loader ts-node/esm build/build.ts http://localhost:8334",

@@ -31,14 +31,13 @@ export const scriptContext = await context({
       "// @grant        GM.xmlHttpRequest\n" +
       "// @grant        GM_getResourceText\n" +
       "// @connect ikasoba.github.io\n" +
-      "// @connect ikasoba.codesk.dev\n" +
       "// @connect *\n" +
       //"// @run-at document-body\n" +
       "// ==/UserScript==\n" +
       "gmExports = this;",
   },
   format: "iife",
-  minify: false,
+  minify: true,
   target: "es2018",
   ///sourcemap: "linked",
   plugins: [
