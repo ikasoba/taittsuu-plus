@@ -232,6 +232,10 @@ export const TaittsuDown = {
       }
     }
 
+    twemoji.parse(content, {
+      className: "tp-twemoji",
+    });
+
     return attachments.value;
   },
 };

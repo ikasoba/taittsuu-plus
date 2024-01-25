@@ -153,7 +153,7 @@ export const applyTheme = () => {
       : currentThemeMode;
 
   const theme = viewThemeId == 0 ? lightTheme : darkTheme;
-  let cache = viewThemeId == 0 ? lightThemeCache : darkThemeCache;
+  let cache = theme.type == "light" ? lightThemeCache : darkThemeCache;
 
   //console.log(viewThemeId, currentThemeMode);
 
@@ -173,10 +173,12 @@ export const applyTheme = () => {
       onload(res) {
         const css = res.responseText;
 
-        if (viewThemeId == 0) {
+        if (theme.type == "light") {
           lightThemeCache = cache = css;
+          GM_setValue("light_theme_cache", lightThemeCache);
         } else {
           darkThemeCache = cache = css;
+          GM_setValue("dark_theme_cache", darkThemeCache);
         }
 
         console.log(cache);
@@ -208,40 +210,38 @@ export const installThemeBase = () => {
 
   ////console.timeEnd("theme draw start");
 
-  requestAnimationFrame(() => {
-    //console.time("put theme mode button");
+  //console.time("put theme mode button");
 
-    const themeList = document.createElement("select");
-    const listContent = [
-      ["自動", -1],
-      ["ライト", 0],
-      ["ダーク", 1],
-    ] as const;
+  const themeList = document.createElement("select");
+  const listContent = [
+    ["自動", -1],
+    ["ライト", 0],
+    ["ダーク", 1],
+  ] as const;
 
-    themeList.id = "taittsuu-plus-theme-list";
+  themeList.id = "taittsuu-plus-theme-list";
 
-    themeList.append(
-      ...listContent.map(([name, value]) => {
-        const item = document.createElement("option");
+  themeList.append(
+    ...listContent.map(([name, value]) => {
+      const item = document.createElement("option");
 
-        item.innerText = name;
-        item.value = "" + value;
-        if (value == currentThemeMode) {
-          item.setAttribute("selected", "true");
-        }
+      item.innerText = name;
+      item.value = "" + value;
+      if (value == currentThemeMode) {
+        item.setAttribute("selected", "true");
+      }
 
-        return item;
-      })
-    );
+      return item;
+    })
+  );
 
-    themeList.addEventListener("change", async () => {
-      currentThemeMode = +themeList.selectedOptions[0].value;
+  themeList.addEventListener("change", async () => {
+    currentThemeMode = +themeList.selectedOptions[0].value;
 
-      applyTheme();
-    });
-
-    $(".post-header-menu").append(themeList);
-
-    ////console.timeEnd("put theme mode button");
+    applyTheme();
   });
+
+  $(".post-header-menu").append(themeList);
+
+  ////console.timeEnd("put theme mode button");
 };

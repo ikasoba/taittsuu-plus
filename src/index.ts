@@ -17,10 +17,13 @@ import { installBulkFollowButton } from "./components/bulkFollowButton.js";
 import { installRightMenu } from "./components/RightMenu.js";
 import { installProfileContentPlus } from "./components/profileContentPlus.js";
 import { installColoredTaitsu } from "./components/coloredTaitsu.js";
+import { installUserProfilePlus } from "./features/userProfilePlus.js";
 
 queueMicrotask(async () => {
-  activatePageRouter();
   avtivateTaitsuuPlusBase();
+  activatePageRouter();
+
+  installColoredTaitsu();
 
   installReTweetButton();
   installTweetContentPlus();
@@ -29,5 +32,5 @@ queueMicrotask(async () => {
   installBulkFollowButton();
 
   installRightMenu();
-  installColoredTaitsu();
+  installUserProfilePlus();
 });

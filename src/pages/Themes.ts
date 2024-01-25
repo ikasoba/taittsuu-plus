@@ -95,8 +95,10 @@ export function ThemeInfoComponent(
       .text("使う")
       .on("click", () => {
         if (theme.type == "light") {
+          GM_setValue("light_theme_cache", null);
           setLightTheme(theme);
         } else {
+          GM_setValue("dark_theme_cache", null);
           setDarkTheme(theme);
         }
       })
@@ -167,9 +169,9 @@ function ThemeEditorComponent(redrawThemes: () => void) {
       },
     });
 
-    redrawThemes();
-
     GM_setValue("themes", themes);
+
+    redrawThemes();
 
     name.val("");
     content.val("");

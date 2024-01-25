@@ -30,11 +30,13 @@ export const scriptContext = await context({
       "// @grant        GM.getValue\n" +
       "// @grant        GM.xmlHttpRequest\n" +
       "// @grant        GM_getResourceText\n" +
+      "// @grant        unsafeWindow\n" +
       "// @connect ikasoba.github.io\n" +
       "// @connect *\n" +
+      "// @require https://cdn.jsdelivr.net/npm/@twemoji/api@15.0.3/dist/twemoji.min.js\n" +
       //"// @run-at document-body\n" +
       "// ==/UserScript==\n" +
-      "gmExports = this;",
+      "gmExports = this;var $ = globalThis.$ = unsafeWindow.$;",
   },
   format: "iife",
   minify: true,

@@ -30,5 +30,8 @@ export const installTweetContentPlus = () => {
     if (attachments.length) {
       contentWrap.after(Attachments(attachments));
     }
+
+    const username = postElem.find(".post-user-name-value")[0];
+    TaittsuDown.render(username);
   });
 };

@@ -1,7 +1,7 @@
 
 
-body {
-  background: var(--bg);
+html, body {
+  background: var(--bg) !important;
   color: var(--fg) !important;
 }
 
@@ -13,14 +13,14 @@ a:hover {
   color: var(--fg-hover) !important;
 }
 
-.taiitsu-red-comment, .coupon-description {
+.taiitsu-red-comment, .coupon-description, .setting-description {
   color: var(--fg) !important;
   font-weight: bold;
 }
 
 button {
-  background: var(--fg);
-  color: var(--bg-color);
+  background: var(--fg) !important;
+  color: var(--bg-color) !important;
 }
 
 *:disabled {
@@ -43,9 +43,9 @@ input[type="color" i] {
   padding: 0px;
 }
 
-.profilePanel, .post-header-wrap, .container-right, .profile-wrap, .bottom-menus, #taiitsuDialog, #taiitsuDialogInner, #posts, #followUsers, .tp-container, #postMenuDialogInner, #profileMenuDialogInner, #taiitsuRangeAndTypeDialogInner, .taiitsuDetailWrap {
-  background: var(--container-bg);
-  color: var(--container-fg);
+.profilePanel, .post-header-wrap, .container-right, .profile-wrap, .bottom-menus, #taiitsuDialog, #taiitsuDialogInner, #posts, #followUsers, .tp-container, #postMenuDialogInner, #profileMenuDialogInner, #taiitsuRangeAndTypeDialogInner, .taiitsuDetailWrap, #taiitsuRangeAndTypeDialog {
+  background: var(--container-bg) !important;
+  color: var(--container-fg) !important;
 }
 
 .coupon-item {
@@ -54,9 +54,11 @@ input[type="color" i] {
   color: var(--container-fg) !important;
 }
 
-.profile-wrap, #posts, #followUsers, #notices, .container-right, .tp-container, textarea, select, #taiitsuDialogInner {
+.profile-wrap, #posts, #followUsers, #notices, .container-right, .tp-container, textarea, select, #taiitsuDialogInner, input[type=text] {
   border-radius: 4px;
   border: solid 1px var(--border-color);
+  background: var(--container-bg) !important;
+  color: var(--container-fg) !important;
   overflow: hidden;
 }
 
@@ -117,6 +119,14 @@ textarea, select {
 .btn-primary, select {
   background: var(--item-bg) !important;
   color: var(--item-fg) !important;
+}
+
+.btn-primary > i {
+  color: var(--item-fg) !important;
+}
+
+.post-button {
+  background-color: transparent !important;
 }
 
 .post-like-button.post-button {
@@ -234,4 +244,14 @@ button.post-button-off {
 
 .terms-point a {
   color: #272727 !important;
+}
+
+.tp-twemoji {
+  display: inline-block;
+  aspect-ratio: 1 / 1;
+  width: 1.25rem;
+  height: 1.25rem;
+
+  position: relative;
+  top: 0.25rem;
 }

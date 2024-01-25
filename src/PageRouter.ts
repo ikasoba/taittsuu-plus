@@ -156,6 +156,15 @@ export class PageRouter {
     const view = component();
     PageRouter.container.empty().append(view);
 
+    const left = PageRouter.getContainerLeft();
+
+    if (left) {
+      left.style.opacity = "0";
+      left.style.pointerEvents = "none";
+    }
+
+    PageRouter.container.css("display", "block");
+
     this.currentComponentView = view;
   }
 

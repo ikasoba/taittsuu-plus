@@ -1,18 +1,18 @@
 :root {
   --bg-img: url('https://taittsuu.com/image/sozai/taitsu_back.png');
-  --bg-color: #444;
+  --bg-color: #23282e;
   --bg: var(--bg-img) var(--bg-color);
   --fg: white;
-  --fg-hover: rgba(255, 255, 255, 0.9);
+  --fg-hover: rgba(255, 255, 255, 0.8);
   --sub-fg: rgba(255, 255, 255, 0.8);
 
-  --container-bg: rgba(68, 68, 68, 0.8);
+  --container-bg: rgba(35, 40, 46, 0.8);
   --container-fg: var(--fg);
 
-  --border-color: #ccc;
+  --border-color: #rgba(255, 255, 255, 0.8);
 
   --item-bg: white;
-  --item-fg: #444;
+  --item-fg: #23282e;
 
   --button-like-on: #f92672;
   --button-rt-on: #00db80;

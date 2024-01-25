@@ -13,7 +13,7 @@ export function Link(icon: string, href: string, text: string) {
   return $(
       '<div class="mt-1">'
     +   h`<a href="${href}" class="decoration-none">`
-    +       `<i class="fas w-20 ${icon}"></i>`
+    +       `<i class="fas w-25 ${icon} text-center"></i>`
     +       h`${text}`
     +   "</a>"
     + "</div>"
